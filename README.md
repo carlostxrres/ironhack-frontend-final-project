@@ -59,17 +59,17 @@ Creamos un fichero `.env`. En él, escribimos las variables de entorno que podem
 - Settings > API > API Key
 
 ```bash
-SUPABASE_PASSWORD = E9zqP2vyMQyEdGTa
-VITE_SUPABASE_API_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJqa3V1ZXhpaXlsa2dud2NraGRwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTc1MTc4MTEsImV4cCI6MjAzMzA5MzgxMX0.j42E-D3tt91aiVTDtOJ-O4Af9S-wYefMmf0a4A5oW9Q
-VITE_SUPABASE_URL = https://bjkuuexiiylkgnwckhdp.supabase.co
+SUPABASE_PASSWORD = aaaaaaaaaaa
+VITE_SUPABASE_API_KEY = aaaaaaaaaaa
+VITE_SUPABASE_URL = https://aaaaaaaaaaa.supabase.co
 ```
 
 Ojo: antes de subir el proyecto a un repositorio, deberíamos asegurarnos de que `.env` está en el fichero `.gitignore` y comentar el contenido añadiendo una almohadilla (`#`) al principio de cada línea, así como añadir un string arbitrario (como por ejemplo `xxxx`) en medio de cada valor crítico:
 
 ```bash
-# SUPABASE_PASSWORD = E9zqP2v xxxx yMQyEdGTa
-# VITE_SUPABASE_API_KEY = eyJhbGc xxxx iOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJqa3V1ZXhpaXlsa2dud2NraGRwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTc1MTc4MTEsImV4cCI6MjAzMzA5MzgxMX0.j42E-D3tt91aiVTDtOJ-O4Af9S-wYefMmf0a4A5oW9Q
-# VITE_SUPABASE_URL = https:/ xxxx /bjkuuexiiylkgnwckhdp.supabase.co
+# SUPABASE_PASSWORD = aaaaa xxxx aaaaaa
+# VITE_SUPABASE_API_KEY = aaaaa xxxx aaaaaa
+# VITE_SUPABASE_URL = aaaaa xxxx aaaaaa
 ```
 
 ### Crear stores
