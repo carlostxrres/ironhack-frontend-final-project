@@ -22,17 +22,19 @@ export default defineStore('toaster-store', {
       if (timeout) {
         setTimeout(() => this.removeToast(toast.id), timeout)
       }
+
+      return toast
     },
     success(payload) {
-      this.updateState(payload, 'success')
+      return this.updateState(payload, 'success')
     },
 
     warning(payload) {
-      this.updateState(payload, 'warning')
+      return this.updateState(payload, 'warning')
     },
 
     error(payload) {
-      this.updateState(payload, 'error')
+      return this.updateState(payload, 'error')
     },
 
     removeToast(toastId) {

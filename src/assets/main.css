@@ -4,3 +4,50 @@
   /* max-width: 1280px; */
   font-weight: normal;
 }
+
+.highlighted-section {
+  color: var(--primary-color-1);
+  background-color: var(--primary-color-2);
+}
+
+.highlighted-section h2 {
+  font-weight: bold;
+}
+
+input {
+  accent-color: var(--secondary-color-1);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: var(--padding-normal);
+  border: none;
+  border-radius: 0.2rem;
+  background-color: white;
+  outline: 2px solid transparent;
+  transition: outline-color var(--transition-slow);
+}
+
+input:focus-within {
+  outline-color: var(--secondary-color-1);
+}
+
+button {
+  padding: var(--padding-normal);
+  border: none;
+  border-radius: 0.2rem;
+  background-color: var(--secondary-color-1);
+  color: var(--color-background);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color var(--transition-slow);
+}
+
+button:hover {
+  background-color: var(--secondary-color-2);
+}
+
+button:active {
+  background-color: var(--secondary-color-3);
+}

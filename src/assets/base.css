@@ -1,6 +1,16 @@
 :root {
-  --color-text: #333;
-  --color-background: white;
+  --primary-color-1: #8a681e;
+  --primary-color-2: #f2cf84;
+  --secondary-color-1: hotpink;
+  --secondary-color-2: #ff7dbe;
+  --secondary-color-3: #ffa2d1;
+  --color-text-1: #373634;
+  --color-text-2: #4f4d4b;
+  --color-text-3: #686563;
+  --color-background: #f1f0ee;
+
+  --padding-normal: 0.6rem 1rem;
+  --transition-slow: 300ms ease;
 }
 
 *,
@@ -13,12 +23,21 @@
 
 body {
   min-height: 100vh;
-  color: var(--color-text);
+  color: var(--color-text-1);
   background: var(--color-background);
   transition:
     color 0.5s,
     background-color 0.5s;
   line-height: 1.6;
+  font-size: 16px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body,
+input,
+textarea {
   font-family:
     Inter,
     -apple-system,
@@ -32,8 +51,4 @@ body {
     'Droid Sans',
     'Helvetica Neue',
     sans-serif;
-  font-size: 16px;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }

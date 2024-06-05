@@ -31,3 +31,4 @@ coverage
 
 # Other directories and files
 ui-inspo
+.env
