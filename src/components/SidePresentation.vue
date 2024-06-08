@@ -15,20 +15,12 @@
   </div>
 </template>
 <style>
-.sign-up-section > * {
-  padding: 1rem 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.highlighted-section {
+.split-layout > .highlighted-section {
   display: none;
   flex: 1;
 }
 @media (min-width: 768px) {
-  .highlighted-section {
+  .split-layout > .highlighted-section {
     display: inherit;
   }
 }

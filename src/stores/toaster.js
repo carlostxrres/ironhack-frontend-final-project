@@ -12,8 +12,8 @@ export default defineStore('toaster-store', {
     toasts: []
   }),
   actions: {
-    updateState(payload, status) {
-      const { text, title, timeout } = payload
+    updateState(toastParams, status) {
+      const { text, title, timeout } = toastParams
 
       const toast = createToast({ title, text, status })
 
@@ -25,16 +25,16 @@ export default defineStore('toaster-store', {
 
       return toast
     },
-    success(payload) {
-      return this.updateState(payload, 'success')
+    success(toastParams) {
+      return this.updateState(toastParams, 'success')
     },
 
-    warning(payload) {
-      return this.updateState(payload, 'warning')
+    warning(toastParams) {
+      return this.updateState(toastParams, 'warning')
     },
 
-    error(payload) {
-      return this.updateState(payload, 'error')
+    error(toastParams) {
+      return this.updateState(toastParams, 'error')
     },
 
     removeToast(toastId) {

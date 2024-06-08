@@ -59,12 +59,44 @@ const formConditions = [
 ]
 
 export const validateForm = (formData) => {
-  const validationResults = formConditions.map((formCondition) => {
-    const fieldValue = formData.get(formCondition.fieldName)
-    const meets = formCondition.condition(fieldValue)
-    return { ...formCondition, meets }
-  })
+  const validationResults = formConditions
+    .map((formCondition) => {
+      const fieldValue = formData.get(formCondition.fieldName)
+      if (!fieldValue) {
+        return null
+      }
+
+      const meets = formCondition.condition(fieldValue)
+      return { ...formCondition, meets }
+    })
+    .filter(Boolean)
 
   const areAllValid = validationResults.every((validation) => validation.meets)
   return { areAllValid, validationResults }
+}
+
+export const errorUi = ({ invalidMessage, conditionName, fieldName }, toasterStore) => {
+  // Toast
+  const toast = toasterStore.error({
+    title: invalidMessage,
+    text: conditionName
+  })
+
+  // Get input
+  const input = document.querySelector(`.form [name="${fieldName}"]`)
+  if (input instanceof Element === false) {
+    return
+  }
+
+  // Highlight & focus
+  input.classList.add('error')
+  input.focus()
+
+  // Cuando se haga focus en el input, quitar el feedback de error
+  const removeUiFeedback = () => {
+    toasterStore.removeToast(toast.id)
+    input.classList.remove('error')
+  }
+  input.addEventListener('focus', removeUiFeedback, { once: true })
+  input.addEventListener('blur', removeUiFeedback, { once: true })
 }
