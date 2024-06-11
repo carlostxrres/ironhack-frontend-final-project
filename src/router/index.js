@@ -3,7 +3,8 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import SignUp from '../views/SignUp.vue'
 import LogIn from '../views/LogIn.vue'
-import DashboardView from '../views/DashboardView.vue'
+import TasksView from '../views/TasksView.vue'
+import CreateTask from '../views/CreateTask.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,9 +30,16 @@ const router = createRouter({
       component: LogIn
     },
     {
-      path: '/dashboard',
-      name: 'dashboard',
-      component: DashboardView
+      path: '/tasks',
+      name: 'tasks',
+      component: TasksView,
+      children: [
+        {
+          path: '/create-task',
+          name: 'create-task',
+          component: CreateTask
+        }
+      ]
     }
   ]
 })
