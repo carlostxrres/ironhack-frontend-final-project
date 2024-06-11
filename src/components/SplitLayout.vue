@@ -4,9 +4,11 @@ import SidePresentation from '@/components/SidePresentation.vue'
 
 <template>
   <div class="split-layout">
-    <SidePresentation />
+    <slot name="side">
+      <SidePresentation />
+    </slot>
     <main>
-      <slot></slot>
+      <slot name="main"></slot>
     </main>
   </div>
 </template>

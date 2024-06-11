@@ -1,4 +1,5 @@
 @import './base.css';
+@import './reset.css';
 
 #app {
   /* max-width: 1280px; */
@@ -52,6 +53,34 @@ button:active {
   background-color: var(--secondary-color-3);
 }
 
+.button-secondary {
+  background-color: transparent;
+  color: var(--primary-color-1);
+  border: 1px solid var(--primary-color-1);
+  padding: var(--padding-small);
+}
+
+.button-secondary:hover {
+  background-color: var(--primary-color-1);
+  color: var(--color-background);
+}
+
+.button-icon {
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+.button-icon.button-secondary {
+  border-radius: 4px;
+}
+
 h1 {
   font-weight: bold;
+}
+
+
+.corner {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
 }

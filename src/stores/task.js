@@ -18,5 +18,31 @@ export const useTaskStore = defineStore('taskStore', () => {
     console.log('tasks: ', tasks.value)
   }
 
-  return { tasks, fetchTasks }
+  const createTask = async ({ title }) => {
+    // https://supabase.com/docs/reference/javascript/insert
+
+    const rawUser = localStorage.getItem('user')
+    const user = JSON.parse(rawUser)
+    const user_id = user.user.id
+
+    const { error } = await supabase.from('tasks').insert({
+      user_id,
+      title,
+      is_complete: false
+      // id: 1,
+      // inserted_at: //
+    })
+
+    if (error) {
+      return {
+        error: error.message
+      }
+    } else {
+      return {
+        error: false
+      }
+    }
+  }
+
+  return { tasks, fetchTasks, createTask }
 })

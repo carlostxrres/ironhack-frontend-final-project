@@ -48,7 +48,7 @@ const onSubmit = async (submitEvent) => {
       title: 'You are in!',
       timeout: 3000
     })
-    router.push('dashboard')
+    router.push('tasks')
     console.log(userStore.user)
   }
 }
@@ -57,20 +57,23 @@ const onSubmit = async (submitEvent) => {
 <template>
   <PageHeader />
   <SplitLayout>
-    <FormComponent @submitForm="onSubmit">
-      <h1>Sign in</h1>
-      <fieldset>
-        <label>
-          <span>Email</span>
-          <input type="email" name="email" placeholder="user@email.com" v-model="email" />
-        </label>
-        <label>
-          <span>Password</span>
-          <input type="password" name="password" placeholder="******" v-model="password" />
-        </label>
-      </fieldset>
-      <button type="submit">Let's go!</button>
-    </FormComponent>
+    <template v-slot:main>
+      <p class="corner">Not registered? <router-link to="/sign-up">Sign up</router-link></p>
+      <FormComponent @submitForm="onSubmit">
+        <h1>Sign in</h1>
+        <fieldset>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" placeholder="user@email.com" v-model="email" />
+          </label>
+          <label>
+            <span>Password</span>
+            <input type="password" name="password" placeholder="******" v-model="password" />
+          </label>
+        </fieldset>
+        <button type="submit">Let's go!</button>
+      </FormComponent>
+    </template>
   </SplitLayout>
   <ToastComponent />
 </template>

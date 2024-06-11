@@ -51,10 +51,19 @@ const formConditions = [
     conditionName: 'You must accept the terms',
     invalidMessage: 'Please accept the terms',
     fieldName: 'accepts-terms',
-    condition: (fieldValue) => {
-      console.log('fieldValue: ', fieldValue)
-      return fieldValue === 'on'
-    }
+    condition: (fieldValue) => fieldValue === 'on'
+  },
+  {
+    conditionName: 'Task name should have at least three characters',
+    invalidMessage: 'Please add a task name with at least three characters',
+    fieldName: 'task-name',
+    condition: (fieldValue) => fieldValue.trim().length > 2
+  },
+  {
+    conditionName: 'Task name should have less than 20 characters',
+    invalidMessage: 'Please add a task name with less than 20 characters',
+    fieldName: 'task-name',
+    condition: (fieldValue) => fieldValue.trim().length < 20
   }
 ]
 

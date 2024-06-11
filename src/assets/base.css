@@ -7,9 +7,12 @@
   --color-text-1: #373634;
   --color-text-2: #4f4d4b;
   --color-text-3: #686563;
+  --color-text-n: #ddd8d4;
   --color-background: #f1f0ee;
 
-  --padding-normal: 0.6rem 1rem;
+  --padding-normal: .6rem 1rem;
+  --padding-small: .3rem .5rem;
+  --transition-fast: 100ms ease;
   --transition-slow: 300ms ease;
 }
 
