@@ -5,6 +5,7 @@ import SignUp from '../views/SignUp.vue'
 import LogIn from '../views/LogIn.vue'
 import TasksView from '../views/TasksView.vue'
 import CreateTask from '../views/CreateTask.vue'
+import ExampleView from '../views/ExampleView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +29,11 @@ const router = createRouter({
       path: '/sign-in',
       name: 'sign-in',
       component: LogIn
+    },
+    {
+      path: '/example',
+      name: 'example',
+      component: ExampleView
     },
     {
       path: '/tasks',

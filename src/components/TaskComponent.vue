@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps } from 'vue'
+
 import IconArrowRight from './icons/IconArrowRight.vue'
 import IconTrash from './icons/IconTrash.vue'
 // import IconBaseline from './icons/IconBaseline.vue'

@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps } from 'vue'
+
 const { size, strokeWidth } = defineProps(['size', 'strokeWidth'])
 </script>
 

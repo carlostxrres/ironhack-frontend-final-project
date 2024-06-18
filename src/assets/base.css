@@ -14,6 +14,9 @@
   --padding-small: .3rem .5rem;
   --transition-fast: 100ms ease;
   --transition-slow: 300ms ease;
+  --border-radius-small: 4px;
+  --border-radius-big: 12px;
+  --box-shadow-big: 0 0 30px rgba(0, 0, 0, 0.1);
 }
 
 *,
