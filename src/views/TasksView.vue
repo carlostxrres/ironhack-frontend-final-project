@@ -8,6 +8,7 @@ import TaskComponent from "@/components/TaskComponent.vue";
 import IconPlus from "@/components/icons/IconPlus.vue";
 import IconRefresh from "@/components/icons/IconRefresh.vue";
 import IconSortAscending from "@/components/icons/IconSortAscending.vue";
+import TaskList from "@/components/TaskList.vue";
 
 import { ref } from "vue";
 import { RouterView } from "vue-router";
@@ -37,77 +38,30 @@ const navigateToCreateTask = () => {
       <h1>Your tasks</h1>
     </template>
     <template v-slot:content>
+      <!-- Tasks List -->
       <p v-if="!taskStore.tasks">You have no tasks yet.</p>
       <div v-else>
-        <div class="actions-bar">
-          <input type="text" placeholder="Search tasks" />
-          <div>
-            <button class="button-icon button-secondary">
-              <IconSortAscending size="16" strokeWidth="3" />
-              <!-- to do: add tooltip -->
-            </button>
-            <button @click="taskStore.fetchTasks()" class="button-icon button-secondary">
-              <IconRefresh size="16" strokeWidth="3" />
-              <!-- to do: add tooltip -->
-            </button>
-          </div>
-        </div>
-        <div class="counts-sentence">
-          <p v-if="taskCounts.incomplete.length">
-            {{ taskCounts.incomplete.length }} to be completed
-          </p>
-          <p v-else>Congrats, all tasks are complete!</p>
-        </div>
-
-        <ul>
-          <li v-for="(task, index) in taskStore.tasks" :key="task.id">
-            <TaskComponent :task="task" :isLast="index + 1 >= taskStore.tasks.length" />
-          </li>
-        </ul>
+        <TaskList />
       </div>
+      <!-- Tasks List: end -->
 
+      <!-- Create New Task -->
       <label class="button-icon-wrap">
         <button class="button-icon" @click="navigateToCreateTask">
           <IconPlus strokeWidth="4" />
         </button>
         <span>Add new task</span>
       </label>
+      <!-- Create New Task: end -->
     </template>
   </SimpleLayout>
 </template>
 
 <style>
-.main {
-  display: flex;
-  flex-direction: column;
-  margin-inline: auto;
-  align-items: center;
-}
-
-.tasks-title {
-  align-self: start;
-}
-.actions-bar {
-  display: flex;
-  align-items: center;
-  gap: 0.2rem;
-}
-.actions-bar > *:last-child {
-  margin-left: auto;
-  display: flex;
-  gap: 0.3rem;
-}
 .button-icon-wrap {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
-}
-
-.counts-sentence {
-  font-size: 0.8rem;
-  color: var(--color-text-3);
-  text-align: end;
-  margin-top: 0.5rem;
 }
 </style>
