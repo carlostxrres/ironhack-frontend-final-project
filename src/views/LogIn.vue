@@ -71,7 +71,7 @@ const onSubmit = async (submitEvent) => {
             <input type="password" name="password" placeholder="******" v-model="password" />
           </label>
         </fieldset>
-        <button type="submit">Let's go!</button>
+        <button type="submit" class="button-primary">Let's go!</button>
       </FormComponent>
     </template>
   </SplitLayout>

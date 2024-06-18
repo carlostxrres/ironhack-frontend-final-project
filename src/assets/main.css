@@ -34,37 +34,65 @@ input:focus-within {
   outline-color: var(--secondary-color-1);
 }
 
+/* Buttons */
 button {
   padding: var(--padding-normal);
   border: none;
   border-radius: 0.2rem;
-  background-color: var(--secondary-color-1);
-  color: var(--color-background);
+  /* background-color: var(--secondary-color-1); */
+  /* color: var(--color-background); */
   font-weight: bold;
   cursor: pointer;
-  transition: background-color var(--transition-slow);
+  transition:
+    background-color var(--transition-slow),
+    border-color var(--transition-slow),
+    color var(--transition-slow),
+    filter var(--transition-slow);
 }
 
-button:hover {
-  background-color: var(--secondary-color-2);
+/* Button colors */
+.button-primary {
+  --color-button: var(--secondary-color-1);
 }
 
-button:active {
-  background-color: var(--secondary-color-3);
+.button-secondary,
+.button-tertiary {
+  --color-button: var(--primary-color-1);
 }
 
-.button-secondary {
+/* Button states, from most discreet to strongest */
+.button-tertiary {
   background-color: transparent;
-  color: var(--primary-color-1);
-  border: 1px solid var(--primary-color-1);
+  color: var(--color-button);
+  border: 1px solid transparent;
   padding: var(--padding-small);
 }
 
-.button-secondary:hover {
-  background-color: var(--primary-color-1);
+.button-secondary,
+.button-tertiary:hover {
+  background-color: transparent;
+  color: var(--color-button);
+  border: 1px solid var(--color-button);
+  padding: var(--padding-small);
+}
+
+.button-primary,
+.button-secondary:hover,
+.button-tertiary:active {
+  background-color: var(--color-button);
   color: var(--color-background);
 }
 
+.button-primary:hover,
+.button-secondary:active {
+  filter: brightness(1.1);
+}
+
+.button-primary:active {
+  filter: brightness(1.2);
+}
+
+/* Button types */
 .button-icon {
   aspect-ratio: 1;
   border-radius: 50%;
@@ -74,6 +102,7 @@ button:active {
   border-radius: 4px;
 }
 
+/* Other */
 h1 {
   font-weight: bold;
 }

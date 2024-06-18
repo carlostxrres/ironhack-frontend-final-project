@@ -47,7 +47,7 @@ const navigateToCreateTask = () => {
 
       <!-- Create New Task -->
       <label class="button-icon-wrap">
-        <button class="button-icon" @click="navigateToCreateTask">
+        <button class="button-icon button-primary" @click="navigateToCreateTask">
           <IconPlus strokeWidth="4" />
         </button>
         <span>Add new task</span>

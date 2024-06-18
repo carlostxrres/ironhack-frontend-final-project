@@ -104,7 +104,7 @@ const onSubmit = async (submitEvent) => {
             </span>
           </label>
         </fieldset>
-        <button type="submit">Create new User</button>
+        <button type="submit" class="button-primary">Create new User</button>
       </FormComponent>
 
       <!--

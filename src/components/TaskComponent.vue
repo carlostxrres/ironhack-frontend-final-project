@@ -49,7 +49,9 @@ watch(
       <small>{{ displayDate }}</small>
     </div>
     <div class="icon-cell">
-      <IconTrash size="18" />
+      <button class="button-icon button-tertiary">
+        <IconTrash size="18" />
+      </button>
       <RouterLink :to="task.id">
         <IconArrowRight size="18" />
       </RouterLink>
