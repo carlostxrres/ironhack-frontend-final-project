@@ -1,9 +1,9 @@
 <script setup>
-const emit = defineEmits(['submitForm'])
+const emit = defineEmits(["submitForm"]);
 
 const submitForm = (event) => {
-  emit('submitForm', event)
-}
+  emit("submitForm", event);
+};
 </script>
 
 <template>
@@ -18,39 +18,41 @@ const submitForm = (event) => {
   flex-direction: column;
   gap: 1rem;
   max-width: 35rem;
+}
 
-  fieldset {
-    border: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+.form fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
-    @media (min-width: 640px) {
-      flex-direction: row;
-    }
-  }
+.form label {
+  display: grid;
+  gap: 0.2rem;
+  flex-grow: 1;
+}
 
-  label {
-    display: grid;
-    gap: 0.2rem;
-    flex-grow: 1;
-  }
+.form label.horizontal-label {
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: 0.5rem;
+}
+.form .terms {
+  font-size: 0.8rem;
+  color: var(--color-text-3);
+}
 
-  label.horizontal-label {
-    grid-template-columns: auto 1fr;
-    align-items: start;
-    gap: 0.5rem;
-  }
+.form .terms input {
+  width: 0.7rem;
+  height: 0.7rem;
+}
 
-  .terms {
-    font-size: 0.8rem;
-    color: var(--color-text-3);
-    input {
-      width: 0.7rem;
-      height: 0.7rem;
-    }
+@media (min-width: 640px) {
+  .form fieldset {
+    flex-direction: row;
   }
 }
 </style>
