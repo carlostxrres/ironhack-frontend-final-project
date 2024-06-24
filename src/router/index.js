@@ -41,12 +41,13 @@ const router = createRouter({
       component: TasksView,
       children: [
         {
-          path: '/create-task',
+          path: 'create-task',
           name: 'create-task',
           component: CreateTask
         }
       ]
     }
+    // to do: add a 404 page
   ]
 })
 

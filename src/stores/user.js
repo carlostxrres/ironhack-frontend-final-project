@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import supabase from '@/lib/supabase'
 import { ref } from 'vue'
+import { setUser } from '@/services/session.js'
 
 export const useUserStore = defineStore('userStore', () => {
   const user = ref()
@@ -33,7 +34,7 @@ export const useUserStore = defineStore('userStore', () => {
       }
     } else {
       user.value = data
-      localStorage.setItem('user', JSON.stringify(data))
+      setUser(data)
       return {
         error: false
       }
