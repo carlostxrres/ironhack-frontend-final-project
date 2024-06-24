@@ -1,5 +1,10 @@
 @import './base.css';
 @import './reset.css';
+@import './transitions.css';
+/*
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+AU+VIC:wght@100..400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=La+Belle+Aurore&family=Playwrite+AU+VIC:wght@100..400&display=swap');
+*/
 
 #app {
   /* max-width: 1280px; */
@@ -25,7 +30,7 @@ input[type="password"] {
   padding: var(--padding-normal);
   border: none;
   border-radius: 0.2rem;
-  background-color: white;
+  background-color: var(--color-background);
   outline: 2px solid transparent;
   transition: outline-color var(--transition-slow);
 }
@@ -33,6 +38,15 @@ input[type="password"] {
 input:focus-within {
   outline-color: var(--secondary-color-1);
 }
+
+input,
+button {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* h1, h2, button {
+  font-family: 'Playwrite AU VIC', sans-serif;
+} */
 
 /* Buttons */
 button {
@@ -73,7 +87,7 @@ button {
   background-color: transparent;
   color: var(--color-button);
   border: 1px solid var(--color-button);
-  padding: var(--padding-small);
+  /* padding: var(--padding-small); */
 }
 
 .button-primary,
@@ -102,14 +116,38 @@ button {
   border-radius: 4px;
 }
 
+.button-small {
+  padding: var(--padding-smaller);
+}
+
 /* Other */
 h1 {
   font-weight: bold;
 }
 
 
-.corner {
-  position: absolute;
-  top: 1rem;
-  right: 2rem;
+a {
+  transition: opacity var(--transition-fast);
+}
+
+a.discreet-anchor {
+  all: unset;
+  cursor: pointer;
+}
+
+a.disabled,
+button.disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/**/
+
+
+.asdasd {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
 }
