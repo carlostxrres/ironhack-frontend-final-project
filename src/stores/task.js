@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import supabase from '@/lib/supabase'
 import { ref } from 'vue'
+import { getUser } from '@/services/session.js'
 
 export const useTaskStore = defineStore('taskStore', () => {
   const tasks = ref([])
@@ -21,8 +22,7 @@ export const useTaskStore = defineStore('taskStore', () => {
   const createTask = async ({ title }) => {
     // https://supabase.com/docs/reference/javascript/insert
 
-    const rawUser = localStorage.getItem('user')
-    const user = JSON.parse(rawUser)
+    const user = getUser()
     const user_id = user.user.id
 
     const { error } = await supabase.from('tasks').insert({
@@ -44,5 +44,42 @@ export const useTaskStore = defineStore('taskStore', () => {
     }
   }
 
-  return { tasks, fetchTasks, createTask }
+  const deleteTask = async ({ id }) => {
+    // https://supabase.com/docs/reference/javascript/delete
+    const response = await supabase
+      .from('tasks')
+      .delete()
+      .eq('id', id)
+
+    if (response.error) {
+      return {
+        error: error.message
+      }
+    } else {
+      return {
+        error: false
+      }
+    }
+  }
+
+  const updateTask = async ({ id, update }) => {
+    // https://supabase.com/docs/reference/javascript/update
+    // { is_complete }
+    const response = await supabase
+      .from('tasks')
+      .update(update)
+      .eq('id', id)
+
+    if (response.error) {
+      return {
+        error: error.message
+      }
+    } else {
+      return {
+        error: false
+      }
+    }
+  }
+
+  return { tasks, fetchTasks, createTask, deleteTask, updateTask }
 })
