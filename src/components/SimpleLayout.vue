@@ -14,6 +14,9 @@ import PageFooter from "@/components/PageFooter.vue";
         <slot name="content"></slot>
       </main>
     </section>
+    <div class="floating">
+      <slot name="floating"></slot>
+    </div>
     <PageFooter class="page-footer" />
   </div>
 </template>
@@ -23,8 +26,9 @@ import PageFooter from "@/components/PageFooter.vue";
   height: 100dvh;
   display: flex;
   flex-direction: column;
+  align-items: center;
   --margin-inline: 2rem;
-  --margin-block: 1rem;
+  --margin-block: 2rem;
   --section-bg-color: white;
 }
 
@@ -40,17 +44,21 @@ import PageFooter from "@/components/PageFooter.vue";
 .section {
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: hotpink blue;
+  scrollbar-color: hotpink transparent;
   background-color: var(--section-bg-color);
   margin: 0 var(--margin-inline);
   border-radius: var(--border-radius-small);
   box-shadow: var(--box-shadow-big);
   position: relative;
-  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: max-content;
 }
 
 .section-header,
-.section-content {
+.section-content,
+.floating {
   padding-inline: var(--margin-inline);
 }
 
