@@ -2,24 +2,18 @@
 // import { useUserStore } from '../stores/user'
 // import { useToasterStore } from '@/stores/toaster.js'
 // import router from '@/router/index.js'
-import PageHeader from "@/components/PageHeader.vue";
-import SimpleLayout from "@/components/SimpleLayout.vue";
-import TaskComponent from "@/components/TaskComponent.vue";
-import IconRefresh from "@/components/icons/IconRefresh.vue";
-import IconSortAscending from "@/components/icons/IconSortAscending.vue";
-import TaskList from "@/components/TaskList.vue";
-import CreateTaskButton from "@/components/CreateTaskButton.vue";
+import SimpleLayout from '@/components/SimpleLayout.vue'
+import TaskList from '@/components/TaskList.vue'
+import CreateTaskButton from '@/components/CreateTaskButton.vue'
 
-import { ref } from "vue";
-import { RouterView } from "vue-router";
-import { useRouter } from "vue-router";
+import { RouterView } from 'vue-router'
 
-const router = useRouter();
+// const router = useRouter();
 // const userStore = useUserStore()
 // const toasterStore = useToasterStore()
-const navigateToCreateTask = () => {
-  router.push("create-task");
-};
+// const navigateToCreateTask = () => {
+//   router.push("create-task");
+// };
 
 // to do: if no user in localStorage, just go redirect to sign-in view
 </script>

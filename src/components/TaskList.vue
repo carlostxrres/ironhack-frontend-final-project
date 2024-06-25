@@ -1,94 +1,46 @@
 <script setup>
-// import { useUserStore } from '../stores/user'
-// import { useToasterStore } from '@/stores/toaster.js'
-// import router from '@/router/index.js'
-import PageHeader from "@/components/PageHeader.vue";
-import SimpleLayout from "@/components/SimpleLayout.vue";
-import TaskComponent from "@/components/TaskComponent.vue";
-import IconPlus from "@/components/icons/IconPlus.vue";
-import IconRefresh from "@/components/icons/IconRefresh.vue";
-import IconSortAscending from "@/components/icons/IconSortAscending.vue";
-import TaskList from "@/components/TaskList.vue";
-import FilterField from "@/components/FilterField.vue";
-import CalendarComponent from "@/components/CalendarComponent.vue";
-import TimerComponent from "@/components/TimerComponent.vue";
+import TaskComponent from '@/components/TaskComponent.vue'
+import FilterField from '@/components/FilterField.vue'
 
-import { ref, computed } from "vue";
-import { RouterView } from "vue-router";
-import { useRouter } from "vue-router";
-import { useTaskStore } from "@/stores/task.js";
+import { ref, computed } from 'vue'
+import { useTaskStore } from '@/stores/task.js'
 
-const taskStore = useTaskStore();
+const taskStore = useTaskStore()
 
-const router = useRouter();
+taskStore.fetchTasks()
 
-taskStore.fetchTasks();
+const filterValue = ref('')
+const filteredTasks = ref(taskStore.tasks)
 
-const filterValue = ref("");
-const filteredTasks = ref(taskStore.tasks);
-
-const updateFilter = (event) => {
-  const curatedFilterValue = filterValue.value.trim().toLowerCase();
+const updateFilter = () => {
+  const curatedFilterValue = filterValue.value.trim().toLowerCase()
   if (curatedFilterValue.length < 1) {
-    return taskStore.tasks;
+    return taskStore.tasks
   }
 
   filteredTasks.value = taskStore.tasks.filter((task) =>
     task.title.toLowerCase().includes(curatedFilterValue)
-  );
-};
+  )
+}
 
 const taskCounts = computed(() => {
-  const tasks = taskStore.tasks;
-  const tasksNum = tasks.length;
-  const areThereTasks = tasksNum > 0;
-  const completed = tasks.filter((task) => task.is_complete);
-  const incomplete = tasks.filter((task) => !task.is_complete);
+  const tasks = taskStore.tasks
+  const tasksNum = tasks.length
+  const areThereTasks = tasksNum > 0
+  const completed = tasks.filter((task) => task.is_complete)
+  const incomplete = tasks.filter((task) => !task.is_complete)
 
   return {
     tasksNum,
     areThereTasks,
     completed,
-    incomplete,
-  };
-});
-
-const events = [
-  {
-    date: "2024-06-25",
-    title: "Meeting with the boss",
-    description: "Discuss the new project",
-    color: "red",
-    id: 1,
-  },
-  {
-    date: "2024-06-25",
-    title: "Another meeting with the boss",
-    description: "What a day",
-    color: "blue",
-    id: 2,
-  },
-  {
-    date: "2024-06-10",
-    title: "Summer party",
-    description: "Yeaaah",
-    color: "green",
-    id: 3,
-  },
-];
+    incomplete
+  }
+})
 </script>
 
 <template>
-  <TimerComponent duration="300" />
-  <!--
-  <CalendarComponent :events="events" />
-  -->
-
-  <FilterField
-    v-model="filterValue"
-    @input="updateFilter"
-    placeholder="Filter tasks..."
-  />
+  <FilterField v-model="filterValue" @input="updateFilter" placeholder="Filter tasks..." />
 
   <!--
   <div class="actions-bar" v-if="taskCounts.areThereTasks">

@@ -46,14 +46,11 @@ export const useTaskStore = defineStore('taskStore', () => {
 
   const deleteTask = async ({ id }) => {
     // https://supabase.com/docs/reference/javascript/delete
-    const response = await supabase
-      .from('tasks')
-      .delete()
-      .eq('id', id)
+    const response = await supabase.from('tasks').delete().eq('id', id)
 
     if (response.error) {
       return {
-        error: error.message
+        error: response.error.message
       }
     } else {
       return {
@@ -65,14 +62,11 @@ export const useTaskStore = defineStore('taskStore', () => {
   const updateTask = async ({ id, update }) => {
     // https://supabase.com/docs/reference/javascript/update
     // { is_complete }
-    const response = await supabase
-      .from('tasks')
-      .update(update)
-      .eq('id', id)
+    const response = await supabase.from('tasks').update(update).eq('id', id)
 
     if (response.error) {
       return {
-        error: error.message
+        error: response.error.message
       }
     } else {
       return {

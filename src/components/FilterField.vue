@@ -1,37 +1,36 @@
 <script setup>
-import IconX from "@/components/icons/IconX.vue";
-import IconSearch from "@/components/icons/IconSearch.vue";
-import { ref } from "vue";
-import { defineProps, defineEmits } from "vue";
+import IconX from '@/components/icons/IconX.vue'
+import IconSearch from '@/components/icons/IconSearch.vue'
+import { defineEmits } from 'vue'
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue'])
 
-const props = defineProps({
-  modelValue: {
-    type: String,
-    required: true,
-  },
-  placeholder: {
-    type: String,
-    required: false,
-    default: "Search...",
-  },
-  info: {
-    type: String,
-    required: false,
-    default: "",
-  },
-});
+// const props = defineProps({
+//   modelValue: {
+//     type: String,
+//     required: true,
+//   },
+//   placeholder: {
+//     type: String,
+//     required: false,
+//     default: "Search...",
+//   },
+//   info: {
+//     type: String,
+//     required: false,
+//     default: "",
+//   },
+// });
 
 const updateValue = (event) => {
-  emit("update:modelValue", event.target.value);
-};
+  emit('update:modelValue', event.target.value)
+}
 
 const clearValue = (event) => {
-  event.preventDefault();
-  emit("update:modelValue", "");
+  event.preventDefault()
+  emit('update:modelValue', '')
   // this.$refs.inputField.focus()
-};
+}
 </script>
 
 <template>
@@ -88,7 +87,9 @@ const clearValue = (event) => {
   gap: 0.5rem;
   width: 100%;
 
-  transition: outline var(--transition-slow), color var(--transition-slow),
+  transition:
+    outline var(--transition-slow),
+    color var(--transition-slow),
     background-color var(--transition-slow);
 }
 

@@ -1,112 +1,112 @@
 <script setup>
-import { ref, defineProps, computed } from "vue";
-import IconArrowLeft from "@/components/icons/IconArrowLeft.vue";
-import IconArrowRight from "@/components/icons/IconArrowRight.vue";
+import { ref, defineProps } from 'vue'
+import IconArrowLeft from '@/components/icons/IconArrowLeft.vue'
+import IconArrowRight from '@/components/icons/IconArrowRight.vue'
 
 const props = defineProps({
   year: {
     type: Number,
     required: false,
-    default: new Date().getFullYear(),
+    default: new Date().getFullYear()
   },
   month: {
     type: Number,
     required: false,
-    default: new Date().getMonth(),
+    default: new Date().getMonth()
   },
   events: {
     type: Array,
     required: false,
-    default: () => [],
-  },
-});
+    default: () => []
+  }
+})
 
-const LOCALE = "en-US";
+const LOCALE = 'en-US'
 
-const currentYear = ref(props.year);
-const currentMonth = ref(props.month);
+const currentYear = ref(props.year)
+const currentMonth = ref(props.month)
 
 const getDaysOfMonth = (year, month) => {
-  const nextMonthIndex = (month + 1) % 12;
-  return new Date(year, nextMonthIndex, 0).getDate();
-};
+  const nextMonthIndex = (month + 1) % 12
+  return new Date(year, nextMonthIndex, 0).getDate()
+}
 
 const getMonthName = (year, month) => {
-  const date = new Date(year, month);
-  const monthIntl = new Intl.DateTimeFormat(LOCALE, { month: "long" });
-  return monthIntl.format(date);
-};
+  const date = new Date(year, month)
+  const monthIntl = new Intl.DateTimeFormat(LOCALE, { month: 'long' })
+  return monthIntl.format(date)
+}
 
 const getWeekDayName = (weekdayIndex) => {
-  const date = new Date(2024, 0, weekdayIndex + 1); // Use any month where the first day is Monday, such as January 2024
-  const weekIntl = new Intl.DateTimeFormat(LOCALE, { weekday: "narrow" });
-  return weekIntl.format(date);
-};
+  const date = new Date(2024, 0, weekdayIndex + 1) // Use any month where the first day is Monday, such as January 2024
+  const weekIntl = new Intl.DateTimeFormat(LOCALE, { weekday: 'narrow' })
+  return weekIntl.format(date)
+}
 
 const getFirstWeekDay = (year, month) => {
-  return new Date(year, month, 1).getDay();
-};
+  return new Date(year, month, 1).getDay()
+}
 
 const getCount = (length) => {
-  return [...Array(length).keys()];
-};
+  return [...Array(length).keys()]
+}
 
 const isSameDay = (date1, date2) => {
-  const date1parsed = new Date(date1);
-  const date2parsed = new Date(date2);
+  const date1parsed = new Date(date1)
+  const date2parsed = new Date(date2)
   // to do: handle errors
 
   return (
     date1parsed.getFullYear() === date2parsed.getFullYear() &&
     date1parsed.getMonth() === date2parsed.getMonth() &&
     date1parsed.getDate() === date2parsed.getDate()
-  );
-};
+  )
+}
 
 const dayToDate = (day) => {
-  return new Date(currentYear.value, currentMonth.value, day);
-};
+  return new Date(currentYear.value, currentMonth.value, day)
+}
 
 const isToday = (day) => {
-  const today = new Date();
-  return isSameDay(today, dayToDate(day));
-};
+  const today = new Date()
+  return isSameDay(today, dayToDate(day))
+}
 
 const getEventsInDay = (day) => {
-  return props.events.filter((event) => isSameDay(event.date, dayToDate(day)));
-};
+  return props.events.filter((event) => isSameDay(event.date, dayToDate(day)))
+}
 
 const getMonthData = () => {
-  const daysOfMonth = getDaysOfMonth(currentYear.value, currentMonth.value);
+  const daysOfMonth = getDaysOfMonth(currentYear.value, currentMonth.value)
   return {
     daysList: getCount(daysOfMonth).map((index) => index + 1),
     monthName: getMonthName(currentYear.value, currentMonth.value),
-    firstWeekDay: getFirstWeekDay(currentYear.value, currentMonth.value),
-  };
-};
+    firstWeekDay: getFirstWeekDay(currentYear.value, currentMonth.value)
+  }
+}
 
-const monthData = ref(getMonthData());
-const weekDayNames = ref(getCount(7).map(getWeekDayName));
+const monthData = ref(getMonthData())
+const weekDayNames = ref(getCount(7).map(getWeekDayName))
 
 const prevMonth = () => {
   if (currentMonth.value === 0) {
-    currentMonth.value = 11;
-    currentYear.value -= 1;
+    currentMonth.value = 11
+    currentYear.value -= 1
   } else {
-    currentMonth.value -= 1;
+    currentMonth.value -= 1
   }
-  monthData.value = getMonthData();
-};
+  monthData.value = getMonthData()
+}
 
 const nextMonth = () => {
   if (currentMonth.value === 11) {
-    currentMonth.value = 0;
-    currentYear.value += 1;
+    currentMonth.value = 0
+    currentYear.value += 1
   } else {
-    currentMonth.value += 1;
+    currentMonth.value += 1
   }
-  monthData.value = getMonthData();
-};
+  monthData.value = getMonthData()
+}
 </script>
 
 <template>
@@ -133,11 +133,7 @@ const nextMonth = () => {
         <div class="day-number">{{ day }}</div>
         <ul class="events-list" v-if="getEventsInDay(day).length">
           <li v-for="event in getEventsInDay(day)" :key="event.id">
-            <div
-              :style="{ backgroundColor: event.color }"
-              :title="event.title"
-              class="event"
-            ></div>
+            <div :style="{ backgroundColor: event.color }" :title="event.title" class="event"></div>
           </li>
         </ul>
       </li>

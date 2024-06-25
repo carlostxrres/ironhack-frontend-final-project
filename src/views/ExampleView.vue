@@ -1,6 +1,5 @@
 <script setup>
-import PageHeader from "@/components/PageHeader.vue";
-import SimpleLayout from "@/components/SimpleLayout.vue";
+import SimpleLayout from '@/components/SimpleLayout.vue'
 </script>
 
 <template>
