@@ -3,6 +3,8 @@ import { useRoute } from 'vue-router'
 import { useTaskStore } from '../stores/task.js'
 import { ref, onMounted, watch } from 'vue'
 import TimerComponent from '@/components/TimerComponent.vue'
+import ToastComponent from '@/components/ToastComponent.vue'
+import DialogComponent from '@/components/DialogComponent.vue'
 
 const route = useRoute()
 const taskStore = useTaskStore()
@@ -28,6 +30,7 @@ const getNewTaskData = async () => {
 onMounted(getNewTaskData)
 watch(() => route.params.taskId, getNewTaskData)
 
+// taskview object example:
 // {
 //   "id": 78,
 //   "user_id": "ad80bd2a-cdcb-4dff-b21f-a237813ce53e",
@@ -36,16 +39,23 @@ watch(() => route.params.taskId, getNewTaskData)
 //   "inserted_at": "2024-06-25T17:21:13.91057+00:00"
 // }
 
+///
+
 // PONER LA LAVADORA
 // [x] Completed
 // Set timer: mins 1 2 5 10 20
 //            hour 1 2
 </script>
 
+<script setup></script>
 <template>
-  <div>task id: {{ taskId }}</div>
+  <DialogComponent title="Create task" :onOpen="focusOnInput">
+    <div>task id: {{ taskId }}</div>
 
-  <TimerComponent duration="300" />
+    <TimerComponent duration="300" />
+  </DialogComponent>
+
+  <div style="position: relative">
+    <ToastComponent />
+  </div>
 </template>
-
-<style></style>
