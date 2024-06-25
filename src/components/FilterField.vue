@@ -1,26 +1,26 @@
 <script setup>
 import IconX from '@/components/icons/IconX.vue'
 import IconSearch from '@/components/icons/IconSearch.vue'
-import { defineEmits } from 'vue'
+import { defineProps, defineEmits } from 'vue'
 
 const emit = defineEmits(['update:modelValue'])
 
-// const props = defineProps({
-//   modelValue: {
-//     type: String,
-//     required: true,
-//   },
-//   placeholder: {
-//     type: String,
-//     required: false,
-//     default: "Search...",
-//   },
-//   info: {
-//     type: String,
-//     required: false,
-//     default: "",
-//   },
-// });
+const props = defineProps({
+  modelValue: {
+    type: String,
+    required: true
+  },
+  placeholder: {
+    type: String,
+    required: false,
+    default: 'Search...'
+  },
+  info: {
+    type: String,
+    required: false,
+    default: ''
+  }
+})
 
 const updateValue = (event) => {
   emit('update:modelValue', event.target.value)
@@ -40,12 +40,12 @@ const clearValue = (event) => {
       ref="inputField"
       type="text"
       :placeholder="placeholder"
-      :value="modelValue"
+      :value="props.modelValue"
       @input="updateValue"
     />
     <button
       class="button-tertiary button-icon reset-button button-small"
-      :style="{ visibility: modelValue.length > 0 ? 'visible' : 'hidden' }"
+      :style="{ visibility: props.modelValue.length > 0 ? 'visible' : 'hidden' }"
       @click="clearValue"
     >
       <IconX size="18" />
