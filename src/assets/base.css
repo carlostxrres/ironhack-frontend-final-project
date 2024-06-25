@@ -61,3 +61,7 @@ textarea {
     'Helvetica Neue',
     sans-serif;
 }
+
+strong {
+  font-weight: bold;
+}
