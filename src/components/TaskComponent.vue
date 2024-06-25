@@ -51,6 +51,8 @@ watch(
       text: `The task "${task.title}" was updated.`,
       timeout: 4000
     })
+
+    taskStore.fetchTasks()
   }
 )
 
