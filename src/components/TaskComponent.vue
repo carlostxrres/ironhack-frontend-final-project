@@ -7,6 +7,7 @@ import { ref, watch } from 'vue'
 import { useTaskStore } from '@/stores/task.js'
 import useToasterStore from '@/stores/toaster.js'
 import ToastComponent from '@/components/ToastComponent.vue'
+import EditableTitle from '@/components/EditableTitle.vue'
 
 const { task, isLast } = defineProps(['task', 'isLast'])
 
@@ -99,14 +100,14 @@ const deleteTask = async () => {
     <!-- <CheckboxComponent value="isComplete" v-model="isComplete" /> -->
     <input type="checkbox" v-model="isComplete" />
     <div>
-      <h4>{{ task.title }}</h4>
+      <EditableTitle :title="task.title" :id="task.id" />
       <small>{{ displayDate }}</small>
     </div>
     <div class="icon-cell">
       <button class="button-icon button-tertiary" @click="deleteTask">
         <IconTrash size="18" />
       </button>
-      <RouterLink :to="'/tasks/' + task.id">
+      <RouterLink :to="'./tasks/' + task.id">
         <IconArrowRight size="18" />
       </RouterLink>
     </div>
@@ -115,6 +116,8 @@ const deleteTask = async () => {
 </template>
 
 <style>
+/* */
+
 .task {
   padding-block: 0.8rem;
 
@@ -131,12 +134,6 @@ const deleteTask = async () => {
 
 .last-task {
   border-bottom: none;
-}
-
-.task h4 {
-  margin: 0;
-  line-height: 1rem;
-  font-weight: 600;
 }
 
 .task > div:last-child {
