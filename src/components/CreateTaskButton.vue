@@ -1,17 +1,13 @@
 <script setup>
-import IconPlus from "@/components/icons/IconPlus.vue";
-import { ref, computed } from "vue";
-import { useRoute } from "vue-router";
+import IconPlus from '@/components/icons/IconPlus.vue'
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 
-const route = useRoute();
-const isCreatingTask = computed(() => route.path.includes("create-task"));
+const route = useRoute()
+const isCreatingTask = computed(() => route.path.includes('create'))
 </script>
 <template>
-  <RouterLink
-    to="./tasks/create-task"
-    class="discreet-anchor"
-    :class="{ disabled: isCreatingTask }"
-  >
+  <RouterLink to="./tasks/create" class="discreet-anchor" :class="{ disabled: isCreatingTask }">
     <label class="button-icon-wrap new-task-button">
       <button class="button-icon button-primary">
         <IconPlus strokeWidth="4" />
@@ -21,5 +17,4 @@ const isCreatingTask = computed(() => route.path.includes("create-task"));
   </RouterLink>
 </template>
 
-<style>
-</style>
+<style></style>

@@ -36,12 +36,12 @@ const router = createRouter({
       component: TasksView,
       children: [
         {
-          path: 'create-task',
-          name: 'create-task',
+          path: '/tasks/create',
+          name: 'create',
           component: CreateTask
         },
         {
-          path: '/task/:taskId',
+          path: '/tasks/:taskId',
           name: 'task',
           component: TaskView
         }
