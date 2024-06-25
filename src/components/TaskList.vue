@@ -1,7 +1,6 @@
 <script setup>
 import TaskComponent from '@/components/TaskComponent.vue'
 import FilterField from '@/components/FilterField.vue'
-
 import { ref, computed } from 'vue'
 import { useTaskStore } from '@/stores/task.js'
 
@@ -10,63 +9,67 @@ const taskStore = useTaskStore()
 taskStore.fetchTasks()
 
 const filterValue = ref('')
-const filteredTasks = ref(taskStore.tasks)
 
-const updateFilter = () => {
+const filteredTasks = computed(() => {
   const curatedFilterValue = filterValue.value.trim().toLowerCase()
-  if (curatedFilterValue.length < 1) {
+  if (!curatedFilterValue) {
     return taskStore.tasks
   }
-
-  filteredTasks.value = taskStore.tasks.filter((task) =>
-    task.title.toLowerCase().includes(curatedFilterValue)
-  )
-}
+  return taskStore.tasks.filter((task) => task.title.toLowerCase().includes(curatedFilterValue))
+})
 
 const taskCounts = computed(() => {
   const tasks = taskStore.tasks
   const tasksNum = tasks.length
-  const areThereTasks = tasksNum > 0
-  const completed = tasks.filter((task) => task.is_complete)
-  const incomplete = tasks.filter((task) => !task.is_complete)
+  const completed = tasks.filter((task) => task.is_complete).length
+  const incomplete = tasksNum - completed
 
   return {
     tasksNum,
-    areThereTasks,
     completed,
     incomplete
   }
 })
+
+const getPluralSuffix = (num) => {
+  return num === 1 ? '' : 's'
+}
 </script>
 
 <template>
-  <FilterField v-model="filterValue" @input="updateFilter" placeholder="Filter tasks..." />
+  <FilterField v-model="filterValue" placeholder="Filter tasks..." />
 
-  <!--
-  <div class="actions-bar" v-if="taskCounts.areThereTasks">
-    <div>
-      <button class="button-icon button-secondary">
-        <IconSortAscending size="16" strokeWidth="3" />
-        to do: add tooltip
-      </button>
-      <button @click="taskStore.fetchTasks()" class="button-icon button-secondary">
-        <IconRefresh size="16" strokeWidth="3" />
-         to do: add tooltip 
-      </button>
-    </div>
-  </div>
-  -->
-  <div class="counts-sentence">
-    <p v-if="!taskCounts.areThereTasks">No tasks yet.</p>
-    <p v-else-if="taskCounts.incomplete.length">
-      {{ taskCounts.incomplete.length }} to be completed
-    </p>
-    <p v-else>Congrats, all tasks are complete!</p>
-  </div>
+  <!-- <div class="actions-bar" v-if="taskCounts.tasksNum.length"> -->
+  <!--   <div> -->
+  <!--     <button class="button-icon button-secondary"> -->
+  <!--       <IconSortAscending size="16" strokeWidth="3" /> -->
+  <!--       to do: add tooltip -->
+  <!--     </button> -->
+  <!--     <button @click="taskStore.fetchTasks()" class="button-icon button-secondary"> -->
+  <!--       <IconRefresh size="16" strokeWidth="3" /> -->
+  <!--        to do: add tooltip  -->
+  <!--     </button> -->
+  <!--   </div> -->
+  <!-- </div> -->
+
+  <p class="counts-sentence">
+    <span v-if="!taskCounts.tasksNum">No tasks yet.</span>
+    <span v-else>
+      <strong>{{ taskCounts.tasksNum }}</strong>
+      task{{ getPluralSuffix(taskCounts.tasksNum) }}
+    </span>
+
+    <span v-if="!taskCounts.tasksNum"></span>
+    <span v-else-if="taskCounts.incomplete">
+      <strong>{{ taskCounts.incomplete }}</strong>
+      to be completed
+    </span>
+    <span v-else>All complete!</span>
+  </p>
 
   <ul>
     <li v-for="(task, index) in filteredTasks" :key="task.id">
-      <TaskComponent :task="task" :isLast="index + 1 >= filteredTasks.length" />
+      <TaskComponent :task="task" :isLast="index + 1 === filteredTasks.length" />
     </li>
   </ul>
 </template>
@@ -89,15 +92,12 @@ const taskCounts = computed(() => {
   justify-content: space-between;
   margin-block: 0.5rem;
 }
-/*.actions-bar > *:last-child {
-  margin-left: auto;
-  display: flex;
-  gap: 0.3rem;
-}*/
 
 .counts-sentence {
   font-size: 0.8rem;
   color: var(--color-text-3);
   margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
 }
 </style>
