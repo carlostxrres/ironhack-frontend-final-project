@@ -1,33 +1,21 @@
 <script setup>
-import IconArrowLeft from '@/components/icons/IconArrowLeft.vue'
 import FormComponent from '@/components/FormComponent.vue'
 import { useTaskStore } from '@/stores/task.js'
 import useToasterStore from '@/stores/toaster.js'
 import { validateForm, errorUi } from '@/services/validateForm.js'
-import { ref, onMounted, computed } from 'vue'
+import { ref, computed } from 'vue'
 import router from '@/router/index.js'
 import ToastComponent from '@/components/ToastComponent.vue'
+import DialogComponent from '@/components/DialogComponent.vue'
 
 const toasterStore = useToasterStore()
 const taskStore = useTaskStore()
-
 const taskName = ref('')
-const dialog = ref()
-const taskNameInput = ref()
+const taskNameInput = ref(null)
 
-onMounted(() => {
-  dialog.value.showModal()
-  // dialog.value.style.maxHeight = "100dvh";
-  // dialog.value.style.minHeight = "40dvh";
-  dialog.value.classList.add('open')
-
+const focusOnInput = () => {
   taskNameInput.value.focus()
-
-  // dialog.value.addEventListener("close", () => {
-  //   // to do: add some closing animation here
-  //   router.push({ path: "/tasks" });
-  // });
-})
+}
 
 const shouldButtonBeDisabled = computed(() => taskName.value.trim().length < 1)
 
@@ -64,27 +52,10 @@ const createTask = async (submitEvent) => {
 
   await taskStore.fetchTasks()
   router.push({ path: '/tasks' })
-  // to do: tell Tasks view that there's a new task
-}
-
-const closeDialog = () => {
-  dialog.value.close()
-  router.push({ path: '/tasks' })
 }
 </script>
 <template>
-  <dialog ref="dialog" class="dialog">
-    <header>
-      <!--
-      <RouterLink class="back-button" to="/tasks">
-        <IconArrowLeft />
-      </RouterLink>
-      -->
-      <button class="icon-button button-tertiary" @click="closeDialog">
-        <IconArrowLeft />
-      </button>
-      <h2>Create task</h2>
-    </header>
+  <DialogComponent title="Create task" :onOpen="focusOnInput">
     <FormComponent @submitForm="createTask">
       <fieldset>
         <label>
@@ -102,35 +73,9 @@ const closeDialog = () => {
         Create it!
       </button>
     </FormComponent>
-    <div style="position: relative">
-      <ToastComponent />
-    </div>
-  </dialog>
+  </DialogComponent>
+
+  <div style="position: relative">
+    <ToastComponent />
+  </div>
 </template>
-
-<style>
-.dialog {
-  top: auto;
-  right: auto;
-  bottom: -20rem;
-  left: 50%;
-  transform: translateX(-50%);
-
-  border: none;
-
-  position: fixed;
-  box-shadow: var(--box-shadow-small);
-  border-radius: var(--border-radius-big);
-  padding: 2rem;
-  min-width: 20rem;
-  transition: bottom var(--transition-slow);
-}
-
-.dialog.open {
-  bottom: 1rem;
-}
-
-.dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-</style>
