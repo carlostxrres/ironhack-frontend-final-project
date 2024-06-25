@@ -5,7 +5,6 @@ import SignUp from '../views/SignUp.vue'
 import LogIn from '../views/LogIn.vue'
 import TasksView from '../views/TasksView.vue'
 import CreateTask from '../views/CreateTask.vue'
-import ExampleView from '../views/TaskView.vue'
 import TaskView from '../views/TaskView.vue'
 
 const router = createRouter({
@@ -30,11 +29,6 @@ const router = createRouter({
       path: '/sign-in',
       name: 'sign-in',
       component: LogIn
-    },
-    {
-      path: '/example',
-      name: 'example',
-      component: ExampleView
     },
     {
       path: '/tasks',
