@@ -12,7 +12,7 @@ import { RouterView } from 'vue-router'
 // const userStore = useUserStore()
 // const toasterStore = useToasterStore()
 // const navigateToCreateTask = () => {
-//   router.push("create-task");
+//   router.push("create");
 // };
 
 // to do: if no user in localStorage, just go redirect to sign-in view

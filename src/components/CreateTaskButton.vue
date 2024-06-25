@@ -16,5 +16,3 @@ const isCreatingTask = computed(() => route.path.includes('create'))
     </label>
   </RouterLink>
 </template>
-
-<style></style>
