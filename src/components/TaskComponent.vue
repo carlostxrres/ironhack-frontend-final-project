@@ -106,7 +106,7 @@ const deleteTask = async () => {
       <button class="button-icon button-tertiary" @click="deleteTask">
         <IconTrash size="18" />
       </button>
-      <RouterLink :to="task.id">
+      <RouterLink :to="'/task/' + task.id">
         <IconArrowRight size="18" />
       </RouterLink>
     </div>
