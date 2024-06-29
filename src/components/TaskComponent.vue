@@ -1,32 +1,32 @@
 <script setup>
-import IconArrowRight from './icons/IconArrowRight.vue'
-import IconTrash from './icons/IconTrash.vue'
+import IconArrowRight from "./icons/IconArrowRight.vue";
+import IconTrash from "./icons/IconTrash.vue";
 // import IconBaseline from './icons/IconBaseline.vue'
 // import CheckboxComponent from "@/components/CheckboxComponent.vue";
-import { ref, watch } from 'vue'
-import { useTaskStore } from '@/stores/task.js'
-import useToasterStore from '@/stores/toaster.js'
-import ToastComponent from '@/components/ToastComponent.vue'
-import EditableTitle from '@/components/EditableTitle.vue'
+import { ref, watch } from "vue";
+import { useTaskStore } from "@/stores/task.js";
+import useToasterStore from "@/stores/toaster.js";
+import ToastComponent from "@/components/ToastComponent.vue";
+import EditableTitle from "@/components/EditableTitle.vue";
 
-const { task, isLast } = defineProps(['task', 'isLast'])
+const { task, isLast } = defineProps(["task", "isLast"]);
 
-const taskStore = useTaskStore()
-const toasterStore = useToasterStore()
+const taskStore = useTaskStore();
+const toasterStore = useToasterStore();
 
 const getDisplayDate = (date) => {
   const options = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric'
-  }
-  return new Date(date).toLocaleDateString('en-US', options)
-}
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+  };
+  return new Date(date).toLocaleDateString("en-US", options);
+};
 
-const displayDate = ref(getDisplayDate(task.inserted_at))
-const isComplete = ref(task.is_complete)
+const displayDate = ref(getDisplayDate(task.inserted_at));
+const isComplete = ref(task.is_complete);
 
 watch(
   () => isComplete.value,
@@ -34,28 +34,28 @@ watch(
     const response = await taskStore.updateTask({
       id: task.id,
       update: {
-        is_complete: newValue
-      }
-    })
+        is_complete: newValue,
+      },
+    });
 
     if (response.error) {
-      console.error('Error updating task:', response.error)
+      console.error("Error updating task:", response.error);
       toasterStore.error({
-        title: 'Task could not be updated',
-        text: response.error
-      })
-      return
+        title: "Task could not be updated",
+        text: response.error,
+      });
+      return;
     }
 
     toasterStore.success({
-      title: 'Task updated',
+      title: "Task updated",
       text: `The task "${task.title}" was updated.`,
-      timeout: 4000
-    })
+      timeout: 4000,
+    });
 
-    taskStore.fetchTasks()
+    taskStore.fetchTasks();
   }
-)
+);
 
 // watch(
 //   () => task.inserted_at,
@@ -65,33 +65,35 @@ watch(
 // )
 
 const deleteTask = async () => {
-  const confirmation = confirm(`Are you sure you want to delete the task "${task.title}"?`)
+  const confirmation = confirm(
+    `Are you sure you want to delete the task "${task.title}"?`
+  );
   if (!confirmation) {
-    return
+    return;
   }
 
-  const response = await taskStore.deleteTask({ id: task.id })
+  const response = await taskStore.deleteTask({ id: task.id });
   if (response.error) {
-    console.error('Error creating task:', response.error)
+    console.error("Error creating task:", response.error);
     toasterStore.error({
-      title: 'Task could not be deleted',
-      text: response.error
-    })
-    return
+      title: "Task could not be deleted",
+      text: response.error,
+    });
+    return;
   }
 
   toasterStore.success({
-    title: 'Task deleted',
+    title: "Task deleted",
     text: `The task "${task.title}" was deleted.`,
-    timeout: 4000
-  })
+    timeout: 4000,
+  });
 
-  await taskStore.fetchTasks()
-}
+  await taskStore.fetchTasks();
+};
 </script>
 
 <template>
-  <article :class="{ task: true, 'last-task': isLast }">
+  <article :class="{ task: true, 'last-task': isLast, 'is-complete': isComplete }">
     <!-- to drag and drop and reorder, later
     <div class="icon-cell">
       <IconBaseline size="18" />
@@ -130,6 +132,7 @@ const deleteTask = async () => {
 .task > * {
   height: 100%;
   padding: 0 0.8rem;
+  transition: opacity var(--transition-fast);
 }
 
 .last-task {
@@ -148,5 +151,16 @@ const deleteTask = async () => {
 .icon-cell > * {
   display: flex;
   align-items: center;
+}
+
+.task.is-complete > * {
+  opacity: .5;
+  /* background: repeating-linear-gradient(
+    315deg,
+    transparent,
+    transparent 10px,
+    rgba(0, 0, 0, 0.1) 10px,
+    rgba(0, 0, 0, 0.1) 20px
+  ); */
 }
 </style>
