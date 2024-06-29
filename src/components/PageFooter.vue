@@ -32,14 +32,16 @@ const getDayPeriod = () => {
 
   const date = new Date();
   const hour = date.getHours();
-  return periods.find((period) => period.end >= hour);
+  const period = periods.find((period) => period.end >= hour);
+  return period.name || "day";
 };
 
 const getGreeting = () => {
-  const period = getDayPeriod();
+  const dayPeriod = getDayPeriod();
   const user = getUser();
   const email = user ? user.user.email : null;
-  return user ? `Good ${period.name}, ${email}!` : `Good ${period.name}!`;
+  const appellative = user ? `, ${email}` : ""
+  return `Good ${dayPeriod}${appellative}!`
 };
 
 const greeting = getGreeting();
