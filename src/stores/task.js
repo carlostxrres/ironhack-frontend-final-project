@@ -8,7 +8,11 @@ export const useTaskStore = defineStore('taskStore', () => {
 
   const fetchTasks = async () => {
     // From https://supabase.com/docs/reference/javascript/select
-    const { data, error } = await supabase.from('tasks').select()
+    const { data, error } = await supabase
+      .from('tasks')
+      .select()
+      .order('is_complete')
+      .order('inserted_at', { ascending: false})
 
     if (error) {
       console.log('Error: ', error)
