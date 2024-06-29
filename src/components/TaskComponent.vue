@@ -153,8 +153,8 @@ const deleteTask = async () => {
   align-items: center;
 }
 
-.task.is-complete > * {
-  opacity: .5;
+.task.is-complete h4 {
+  text-decoration: line-through;
   /* background: repeating-linear-gradient(
     315deg,
     transparent,
