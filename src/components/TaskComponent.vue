@@ -9,7 +9,7 @@ import useToasterStore from "@/stores/toaster.js";
 import ToastComponent from "@/components/ToastComponent.vue";
 import EditableTitle from "@/components/EditableTitle.vue";
 
-const { task, isLast } = defineProps(["task", "isLast"]);
+const { task } = defineProps(["task"]);
 
 const taskStore = useTaskStore();
 const toasterStore = useToasterStore();
@@ -93,7 +93,7 @@ const deleteTask = async () => {
 </script>
 
 <template>
-  <article :class="{ task: true, 'last-task': isLast, 'is-complete': isComplete }">
+  <article :class="{ task: true, 'is-complete': isComplete }">
     <!-- to drag and drop and reorder, later
     <div class="icon-cell">
       <IconBaseline size="18" />
@@ -135,7 +135,7 @@ const deleteTask = async () => {
   transition: opacity var(--transition-fast);
 }
 
-.last-task {
+.tasks-list > li:last-child .task {
   border-bottom: none;
 }
 

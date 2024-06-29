@@ -67,9 +67,9 @@ const getPluralSuffix = (num) => {
     <span v-else>All complete!</span>
   </p>
 
-  <ul>
+  <ul class="tasks-list">
     <li v-for="(task, index) in filteredTasks" :key="task.id">
-      <TaskComponent :task="task" :isLast="index + 1 === filteredTasks.length" />
+      <TaskComponent :task="task" />
     </li>
   </ul>
 </template>
