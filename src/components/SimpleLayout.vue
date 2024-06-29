@@ -35,10 +35,17 @@ import PageFooter from "@/components/PageFooter.vue";
 .page-header,
 .page-footer {
   padding: var(--margin-block) var(--margin-inline);
+
+  align-self: normal;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .page-footer {
   margin-top: auto;
+  border-top: 1px solid #ccc;
 }
 
 .section {
