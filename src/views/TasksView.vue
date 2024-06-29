@@ -7,6 +7,16 @@ import TaskList from '@/components/TaskList.vue'
 import CreateTaskButton from '@/components/CreateTaskButton.vue'
 
 import { RouterView } from 'vue-router'
+import { getUser } from '@/services/session.js'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const user = getUser()
+console.log(user)
+if (!user) {
+  router.push('/sign-in')
+}
 
 // const router = useRouter();
 // const userStore = useUserStore()
