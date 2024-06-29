@@ -151,3 +151,9 @@ button.disabled {
   align-items: baseline;
   gap: 1rem;
 }
+
+.icon-entry {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
