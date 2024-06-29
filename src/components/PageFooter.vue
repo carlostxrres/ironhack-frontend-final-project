@@ -9,26 +9,30 @@ const logOut = () => {
 const getDayPeriod = () => {
   const periods = [
     {
+      name: "night",
+      end: 6,
+    },
+    {
       name: "morning",
-      start: 0,
+      end: 12,
     },
     {
       name: "afternoon",
-      start: 12,
+      end: 19,
     },
     {
       name: "evening",
-      start: 19,
+      end: 22,
     },
     {
       name: "night",
-      start: 22,
+      end: 24,
     },
   ];
 
   const date = new Date();
-  const hours = date.getHours();
-  return periods.find((period) => hours >= period.start);
+  const hour = date.getHours();
+  return periods.find((period) => period.end >= hour);
 };
 
 const getGreeting = () => {
