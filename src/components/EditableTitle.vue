@@ -1,68 +1,72 @@
 <script setup>
-import { ref, defineProps, nextTick } from 'vue'
-import IconPencil from './icons/IconPencil.vue'
-import { useTaskStore } from '@/stores/task.js'
-import useToasterStore from '@/stores/toaster.js'
+import { ref, defineProps, nextTick } from "vue";
+import IconPencil from "./icons/IconPencil.vue";
+import { useTaskStore } from "@/stores/task.js";
+import useToasterStore from "@/stores/toaster.js";
 
-const taskStore = useTaskStore()
-const toasterStore = useToasterStore()
+const taskStore = useTaskStore();
+const toasterStore = useToasterStore();
 
 const props = defineProps({
   title: {
     type: String,
-    required: true
+    required: true,
   },
   id: {
     type: Number,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
-const isEditing = ref(false)
-const titleValue = ref(props.title)
-const inputRef = ref(null)
+const isEditing = ref(false);
+const titleValue = ref(props.title);
+const titleInDatabase = ref(props.title);
+const inputRef = ref(null);
 
 const updateTitle = async (newTitle) => {
   const response = await taskStore.updateTask({
     id: props.id,
     update: {
-      title: newTitle
-    }
-  })
+      title: newTitle,
+    },
+  });
 
   if (response.error) {
-    console.error('Error updating task:', response.error)
+    console.error("Error updating task:", response.error);
     toasterStore.error({
-      title: 'Task could not be updated',
-      text: response.error
-    })
-    return
+      title: "Task could not be updated",
+      text: response.error,
+    });
+    return;
   }
 
+  titleInDatabase.value = newTitle;
   toasterStore.success({
-    title: 'Task updated',
+    title: "Task updated",
     text: `The task "${newTitle}" was updated.`,
-    timeout: 4000
-  })
+    timeout: 4000,
+  });
 
-  taskStore.fetchTasks()
-}
+  taskStore.fetchTasks();
+};
 
 const toggleEditMode = () => {
-  isEditing.value = !isEditing.value
+  isEditing.value = !isEditing.value;
 
   if (isEditing.value) {
-    nextTick().then(() => inputRef.value.focus())
+    nextTick().then(() => inputRef.value.focus());
+  } else if (titleValue.value === titleInDatabase.value) {
+    return;
   } else {
-    updateTitle(titleValue.value)
+    updateTitle(titleValue.value);
   }
-}
+};
 
 const onEnterKey = (event) => {
-  if (event.key === 'Enter') {
-    toggleEditMode()
+  if (event.key === "Enter") {
+    toggleEditMode();
   }
-}
+};
 </script>
 
 <template>
@@ -98,7 +102,7 @@ const onEnterKey = (event) => {
   cursor: pointer;
 }
 
-input[type='text'].title-input,
+input[type="text"].title-input,
 .title-display {
   line-height: 1.5rem;
   color: var(--primary-color-1);
@@ -112,7 +116,7 @@ input[type='text'].title-input,
   background: none;
 }
 
-input[type='text'].title-input {
+input[type="text"].title-input {
   width: 8rem;
   display: block;
   background: transparent;
