@@ -35,7 +35,7 @@ const getGreeting = () => {
   const period = getDayPeriod();
   const user = getUser();
   const email = user ? user.user.email : null;
-  return user ? `Good ${period.name}, ${email}` : `Good ${period.name}`;
+  return user ? `Good ${period.name}, ${email}!` : `Good ${period.name}!`;
 };
 
 const greeting = getGreeting();
