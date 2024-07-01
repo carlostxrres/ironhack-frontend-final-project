@@ -10,29 +10,28 @@ const getDayPeriod = () => {
   const periods = [
     {
       name: "night",
-      end: 6,
+      endHour: 6,
     },
     {
       name: "morning",
-      end: 12,
+      endHour: 12,
     },
     {
       name: "afternoon",
-      end: 19,
+      endHour: 19,
     },
     {
       name: "evening",
-      end: 22,
+      endHour: 22,
     },
     {
       name: "night",
-      end: 24,
+      endHour: 24,
     },
   ];
 
-  const date = new Date();
-  const hour = date.getHours();
-  const period = periods.find((period) => period.end >= hour);
+  const hour = new Date().getHours();
+  const period = periods.find((period) => period.endHour >= hour);
   return period.name || "day";
 };
 
@@ -40,8 +39,8 @@ const getGreeting = () => {
   const dayPeriod = getDayPeriod();
   const user = getUser();
   const email = user ? user.user.email : null;
-  const appellative = user ? `, ${email}` : ""
-  return `Good ${dayPeriod}${appellative}!`
+  const appellative = user ? `, ${email}` : "";
+  return `Good ${dayPeriod}${appellative}!`;
 };
 
 const greeting = getGreeting();
@@ -54,5 +53,4 @@ const greeting = getGreeting();
   </footer>
 </template>
 
-<style>
-</style>
+<style></style>
