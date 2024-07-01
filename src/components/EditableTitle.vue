@@ -61,12 +61,6 @@ const toggleEditMode = () => {
     updateTitle(titleValue.value);
   }
 };
-
-const onEnterKey = (event) => {
-  if (event.key === "Enter") {
-    toggleEditMode();
-  }
-};
 </script>
 
 <template>
@@ -84,7 +78,7 @@ const onEnterKey = (event) => {
       class="title-input"
       v-model="titleValue"
       @blur="toggleEditMode"
-      @keyup.enter="onEnterKey"
+      @keyup.enter="toggleEditMode"
     />
 
     <h4 v-show="!isEditing" class="title-display">{{ titleValue }}</h4>
