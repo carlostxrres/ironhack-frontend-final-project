@@ -4,7 +4,6 @@ import { useTaskStore } from "../stores/task.js";
 import useToasterStore from "@/stores/toaster.js";
 import { ref, onMounted, watch } from "vue";
 import TimerComponent from "@/components/TimerComponent.vue";
-import ToastComponent from "@/components/ToastComponent.vue";
 import DialogComponent from "@/components/DialogComponent.vue";
 import FormComponent from "@/components/FormComponent.vue";
 import EditableTitle from "@/components/EditableTitle.vue";
@@ -75,27 +74,6 @@ const toggleTimer = () => {
   const inputMethod = isTimerOn.value ? "blur" : "focus";
   inputTimerMinutes.value[inputMethod]();
 };
-
-// taskview object example:
-// {
-//   "id": 78,
-//   "user_id": "ad80bd2a-cdcb-4dff-b21f-a237813ce53e",
-//   "title": "Poner la lavadora",
-//   "is_complete": false,
-//   "inserted_at": "2024-06-25T17:21:13.91057+00:00"
-// }
-
-///
-
-// PONER LA LAVADORA
-// [x] Completed
-// Set timer: mins 1 2 5 10 20
-//            hour 1 2
-
-// to do: skeleton loader?
-// make info appear smoothly
-
-// event: id color date title
 
 </script>
 
