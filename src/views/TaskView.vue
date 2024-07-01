@@ -26,15 +26,6 @@ const inputTimerMinutes = ref(null);
 
 const calendarEvents = ref([])
 
-// const events = [
-//   {
-//     id: 1,
-//     color: "blue",
-//     date: "2024-06-25",
-//     title: "Task created",
-//   },
-// ];
-
 const getNewTaskData = async () => {
   await taskStore.fetchTasks();
   const targetTask = taskStore.tasks.find((t) => t.id == taskId);
@@ -49,11 +40,13 @@ const getNewTaskData = async () => {
 
   calendarEvents.value = taskStore.tasks.map(t => {
     const isTargetTask = t.id == taskId
+    const opacity = t.is_complete ? .4 : .2
+    const completedText = t.is_complete ? "Completed" : "Incomplete"
     return {
       id: t.id,
-      color: isTargetTask ? "var(--secondary-color-1)" : "#aaa",
+      color: isTargetTask ? "var(--secondary-color-1)" : `rgba(0, 0, 0, ${opacity})`,
       date: t.inserted_at,
-      title: t.title,
+      title: `${t.title} - ${completedText}`,
     }
   })
 };
@@ -73,15 +66,13 @@ watch(
   }
 );
 
-const setTimer = (event) => {
-  console.log(event);
+const setTimer = () => {
   isTimerOn.value = true;
 };
 
 const toggleTimer = () => {
   isTimerOn.value = !isTimerOn.value;
   const inputMethod = isTimerOn.value ? "blur" : "focus";
-  console.log(inputMethod);
   inputTimerMinutes.value[inputMethod]();
 };
 
