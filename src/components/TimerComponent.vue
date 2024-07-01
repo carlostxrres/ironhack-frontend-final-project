@@ -54,36 +54,41 @@ onMounted(reset);
 </script>
 
 <template>
-  <article>
-    <header>
+  <article class="timer">
+    <header class="timer-time">
       <span v-if="min > 0">{{ min }}:{{ sec }}</span>
       <span v-else>{{ sec }}.{{ hun }}</span>
     </header>
-    <footer>
-      <span>
-        <span v-if="remaining === 0"></span>
-        <IconPauseFilled v-else-if="getIsRunning()" @click="pause" />
-        <IconPlayFilled v-else @click="start" />
+    <footer class="timer-actions">
+      <span v-if="remaining === 0"></span>
+      <span v-else>
+        <button v-if="getIsRunning()" @click="pause" class="button-tertiary button-icon">
+          <IconPauseFilled />
+        </button>
+        <button v-else @click="start" class="button-tertiary button-icon">
+          <IconPlayFilled />
+        </button>
       </span>
-      <span>
-        <IconPreviousFilled @click="reset" />
-      </span>
+
+      <button @click="reset" class="button-tertiary button-icon">
+        <IconPreviousFilled />
+      </button>
     </footer>
   </article>
 </template>
 
-<style scoped>
-article {
+<style>
+.timer {
   width: max-content;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-header {
+.timer-time {
   font-family: monospace;
   font-size: 2rem;
 }
-footer {
+.timer-actions {
   display: flex;
   justify-content: space-between;
   width: 100%;
