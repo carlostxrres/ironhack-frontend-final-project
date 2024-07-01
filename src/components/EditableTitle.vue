@@ -65,13 +65,15 @@ const startEditing = () => {
   isEditing.value = true;
   nextTick(() => titleRef.value.focus());
 };
-
 </script>
 
 <template>
-  <div class="icon-entry">
+  <div class="editable-wrap">
     <button
-      :class="{ 'button-tertiary': true, 'button-icon': true, 'button-active': isEditing }"
+      :class="{
+        'edit-button': true,
+        'button-active': isEditing,
+      }"
       @click="startEditing"
     >
       <IconPencil size="16" />
@@ -90,6 +92,21 @@ const startEditing = () => {
 </template>
 
 <style>
+.edit-button {
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  padding: .2rem;
+  aspect-ratio: 1;
+  position: absolute;
+  transform: translateX(-100%);
+}
+.editable-wrap:hover .edit-button{
+  opacity: 1;
+}
+.editable-wrap {
+  display: flex;
+  align-items: center;
+}
 .title-display {
   line-height: 1.5rem;
   color: var(--primary-color-1);
