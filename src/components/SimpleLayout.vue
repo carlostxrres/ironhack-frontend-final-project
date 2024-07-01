@@ -76,6 +76,7 @@ import ToastComponent from "@/components/ToastComponent.vue";
   position: sticky;
   top: 0;
   background-color: var(--section-bg-color);
+  z-index: 1;
 }
 
 .section-content {

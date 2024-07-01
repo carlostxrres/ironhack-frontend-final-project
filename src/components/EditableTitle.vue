@@ -106,8 +106,8 @@ const startEditing = () => {
 .editable-wrap {
   display: flex;
   align-items: center;
-  --padding-inline: 0.4rem;
-  --padding-block: 0.2rem;
+  --padding-inline: .4rem;
+  --padding-block: .2rem;
 }
 .title-display {
   line-height: 1.5rem;
@@ -126,6 +126,7 @@ const startEditing = () => {
   transform: translateX(calc(-1 * var(--padding-inline)));
 
   transition: background-color var(--transition-fast);
+  z-index: 0;
 }
 
 .title-display.editable {
