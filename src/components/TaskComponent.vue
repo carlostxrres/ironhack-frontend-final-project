@@ -30,30 +30,8 @@ const isComplete = ref(task.is_complete);
 
 watch(
   () => isComplete.value,
-  async (newValue) => {
-    const response = await taskStore.updateTask({
-      id: task.id,
-      update: {
-        is_complete: newValue,
-      },
-    });
-
-    if (response.error) {
-      console.error("Error updating task:", response.error);
-      toasterStore.error({
-        title: "Task could not be updated",
-        text: response.error,
-      });
-      return;
-    }
-
-    toasterStore.success({
-      title: "Task updated",
-      text: `The task "${task.title}" was updated.`,
-      timeout: 4000,
-    });
-
-    taskStore.fetchTasks();
+  newValue => {
+    taskStore.updateComplete(newValue, task, toasterStore)
   }
 );
 

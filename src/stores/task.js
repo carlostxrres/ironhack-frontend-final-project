@@ -79,5 +79,31 @@ export const useTaskStore = defineStore('taskStore', () => {
     }
   }
 
-  return { tasks, fetchTasks, createTask, deleteTask, updateTask }
+  const updateComplete = async (newValue, task, toasterStore) => {
+    const response = await updateTask({
+      id: task.id,
+      update: {
+        is_complete: newValue,
+      },
+    });
+
+    if (response.error) {
+      console.error("Error updating task:", response.error);
+      toasterStore.error({
+        title: "Task could not be updated",
+        text: response.error,
+      });
+      return;
+    }
+
+    toasterStore.success({
+      title: "Task updated",
+      text: `The task "${task.title}" was updated.`,
+      timeout: 4000,
+    });
+
+    fetchTasks();
+  }
+
+  return { tasks, fetchTasks, createTask, deleteTask, updateTask, updateComplete }
 })
