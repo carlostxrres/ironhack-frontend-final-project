@@ -23,7 +23,7 @@ const isTimerOn = ref(false);
 const timerDuration = ref(null);
 const inputTimerMinutes = ref(null);
 
-const calendarEvents = ref([])
+const calendarEvents = ref([]);
 
 const getNewTaskData = async () => {
   await taskStore.fetchTasks();
@@ -37,17 +37,17 @@ const getNewTaskData = async () => {
   task.value = targetTask;
   isComplete.value = targetTask.is_complete;
 
-  calendarEvents.value = taskStore.tasks.map(t => {
-    const isTargetTask = t.id == taskId
-    const opacity = t.is_complete ? .4 : .2
-    const completedText = t.is_complete ? "Completed" : "Incomplete"
+  calendarEvents.value = taskStore.tasks.map((t) => {
+    const isTargetTask = t.id == taskId;
+    const opacity = t.is_complete ? 0.4 : 0.2;
+    const completedText = t.is_complete ? "Completed" : "Incomplete";
     return {
       id: t.id,
       color: isTargetTask ? "var(--secondary-color-1)" : `rgba(0, 0, 0, ${opacity})`,
       date: t.inserted_at,
       title: `${t.title} - ${completedText}`,
-    }
-  })
+    };
+  });
 };
 
 onMounted(getNewTaskData);
@@ -74,7 +74,6 @@ const toggleTimer = () => {
   const inputMethod = isTimerOn.value ? "blur" : "focus";
   inputTimerMinutes.value[inputMethod]();
 };
-
 </script>
 
 <template>
@@ -120,7 +119,11 @@ const toggleTimer = () => {
           </FormComponent>
 
           <Transition name="timer">
-            <TimerComponent :duration="timerDuration" v-if="isTimerOn" />
+            <TimerComponent
+              :duration="timerDuration"
+              :startOnMount="true"
+              v-if="isTimerOn"
+            />
           </Transition>
         </template>
       </DetailsComponent>
@@ -151,6 +154,6 @@ const toggleTimer = () => {
 .task-tools-section {
   display: flex;
   flex-direction: column;
-  gap: .5rem;
+  gap: 0.5rem;
 }
 </style>

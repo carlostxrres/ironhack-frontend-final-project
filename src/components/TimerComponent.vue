@@ -10,6 +10,11 @@ const props = defineProps({
     required: false,
     default: 60,
   },
+  startOnMount: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 
 const end = ref(null);
@@ -50,7 +55,12 @@ const pad = (value) => {
   return String(value).padStart(2, "0");
 };
 
-onMounted(reset);
+onMounted(() => {
+  reset();
+  if (props.startOnMount) {
+    start();
+  }
+});
 </script>
 
 <template>
