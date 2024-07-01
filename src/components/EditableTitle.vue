@@ -32,9 +32,9 @@ const updateTitle = async (newTitle) => {
   });
 
   if (response.error) {
-    console.error("Error updating task:", response.error);
+    console.error("Error renaming task:", response.error);
     toasterStore.error({
-      title: "Task could not be updated",
+      title: `Your task could not be renamed to "${newTitle}"`,
       text: response.error,
     });
     return;
@@ -42,8 +42,8 @@ const updateTitle = async (newTitle) => {
 
   titleInDatabase.value = newTitle;
   toasterStore.success({
-    title: "Task updated",
-    text: `The task "${newTitle}" was updated.`,
+    title: "Task renamed",
+    text: `Your task was renamed to "${newTitle}".`,
     timeout: 4000,
   });
 

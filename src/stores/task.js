@@ -87,10 +87,11 @@ export const useTaskStore = defineStore('taskStore', () => {
       },
     });
 
+    const newValueString = newValue ? "complete" : "incomplete";
     if (response.error) {
       console.error("Error updating task:", response.error);
       toasterStore.error({
-        title: "Task could not be updated",
+        title: `The task "${task.title}" could not be set to "${newValueString}"`,
         text: response.error,
       });
       return;
@@ -98,7 +99,7 @@ export const useTaskStore = defineStore('taskStore', () => {
 
     toasterStore.success({
       title: "Task updated",
-      text: `The task "${task.title}" was updated.`,
+      text: `The task "${task.title}" was set to "${newValueString}".`,
       timeout: 4000,
     });
 
