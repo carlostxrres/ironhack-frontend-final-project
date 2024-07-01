@@ -62,7 +62,7 @@ import ToastComponent from "@/components/ToastComponent.vue";
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  width: max-content;
+  /* width: max-content; */
 }
 
 .section-header,
