@@ -73,7 +73,7 @@ const onSubmit = async (submitEvent) => {
     <template v-slot:header>
       <div class="asdasd">
         <h1>Sign up</h1>
-        <p>Already a member? <router-link to="/sign-in">Sign in</router-link></p>
+        <small>Already a member? <router-link to="/sign-in">Sign in</router-link></small>
       </div>
     </template>
     <template v-slot:content>
