@@ -71,9 +71,7 @@ const getPluralSuffix = (num) => {
   </p>
 
   <ul class="tasks-list">
-    <li v-for="(task, index) in filteredTasks" :key="task.id">
-      <TaskComponent :task="task" />
-    </li>
+    <TaskComponent v-for="(task, index) in filteredTasks" :key="task.id" :task="task" />
   </ul>
 </template>
 
@@ -99,7 +97,6 @@ const getPluralSuffix = (num) => {
 .counts-sentence {
   font-size: 0.8rem;
   color: var(--color-text-3);
-  margin-top: 0.5rem;
   display: flex;
   justify-content: space-between;
 }

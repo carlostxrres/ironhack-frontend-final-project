@@ -60,29 +60,31 @@ const deleteTask = async () => {
 </script>
 
 <template>
-  <article :class="{ task: true, 'is-complete': isComplete }">
+  <li :class="{ task: true, 'is-complete': isComplete }">
     <!-- to drag and drop and reorder, later
-    <div class="icon-cell">
+    <div class="task-lower">
       <IconBaseline size="18" />
     </div>
     -->
     <!-- <CheckboxComponent value="isComplete" v-model="isComplete" /> -->
-    <label>
+    <label style="display: flex;">
       <input type="checkbox" v-model="isComplete" />
     </label>
     <div class="task-content">
       <EditableTitle :title="task.title" :id="task.id" />
-      <div class="icon-cell">
+      <div class="task-lower">
         <small>{{ displayDate }}</small>
-        <button class="button-icon button-tertiary" @click="deleteTask">
-          <IconTrash size="18" />
-        </button>
-        <RouterLink :to="'./tasks/' + task.id">
-          <IconArrowRight size="18" />
-        </RouterLink>
+        <div>
+          <button class="button-icon button-tertiary" @click="deleteTask">
+            <IconTrash size="18" />
+          </button>
+          <RouterLink :to="'./tasks/' + task.id">
+            <IconArrowRight size="18" />
+          </RouterLink>
+        </div>
       </div>
     </div>
-  </article>
+  </li>
 </template>
 
 <style>
@@ -93,12 +95,14 @@ const deleteTask = async () => {
 }
 
 .task {
-  padding-block: 0.8rem;
-
-  display: flex;
+  padding-block: 0.3rem;
+  display: grid;
+  grid-template-columns: min-content 1fr;
   align-items: center;
+}
 
-  border-bottom: 1px solid var(--color-text-3);
+.task:not(:last-child) {
+  border-bottom: 1px solid var(--color-background);
 }
 
 .task > * {
@@ -107,20 +111,14 @@ const deleteTask = async () => {
   transition: opacity var(--transition-fast);
 }
 
-.tasks-list > li:last-child .task {
-  border-bottom: none;
-}
-
-.task > div:last-child {
-  margin-left: auto;
-}
-
-.icon-cell {
+.task-lower {
   display: flex;
   align-items: center;
+  gap: 0.5rem;
+  justify-content: space-between;
 }
 
-.icon-cell > * {
+.task-lower > * {
   display: flex;
   align-items: center;
 }
