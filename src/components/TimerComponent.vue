@@ -38,7 +38,7 @@ const pause = () => {
 
 const reset = () => {
   const isRunning = getIsRunning(); // Has to be taken before resetting the values
-  remaining.value = props.duration * 1000;
+  remaining.value = props.duration * 60000;
   end.value = isRunning ? Date.now() + remaining.value : null;
 };
 
