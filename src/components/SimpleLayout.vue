@@ -1,6 +1,7 @@
 <script setup>
 import PageHeader from "@/components/PageHeader.vue";
 import PageFooter from "@/components/PageFooter.vue";
+import ToastComponent from "@/components/ToastComponent.vue";
 </script>
 
 <template>
@@ -18,6 +19,7 @@ import PageFooter from "@/components/PageFooter.vue";
       <slot name="floating"></slot>
     </div>
     <PageFooter class="page-footer" />
+    <ToastComponent />
   </div>
 </template>
 

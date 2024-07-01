@@ -117,8 +117,6 @@ const onSubmit = async (submitEvent) => {
       </FormComponent>
     </template>
   </SimpleLayout>
-
-  <ToastComponent />
 </template>
 
 <style></style>

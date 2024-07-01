@@ -165,10 +165,6 @@ const toggleTimer = () => {
       </DetailsComponent>
     </div>
   </DialogComponent>
-
-  <div style="position: relative">
-    <ToastComponent />
-  </div>
 </template>
 
 <style>

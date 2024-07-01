@@ -6,7 +6,6 @@ import IconTrash from "./icons/IconTrash.vue";
 import { ref, watch } from "vue";
 import { useTaskStore } from "@/stores/task.js";
 import useToasterStore from "@/stores/toaster.js";
-import ToastComponent from "@/components/ToastComponent.vue";
 import EditableTitle from "@/components/EditableTitle.vue";
 import { getDisplayDate } from "@/services/datetime.js";
 
