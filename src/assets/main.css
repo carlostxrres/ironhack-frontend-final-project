@@ -155,11 +155,19 @@ button.disabled,
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 1rem;
+  gap: 2rem;
+}
+
+.asdasd > *:first-child {
+  flex-shrink: 0;
 }
 
 .icon-entry {
   display: flex;
   gap: 0.5rem;
   align-items: center;
+}
+.icon-entry svg,
+.icon-entry input {
+  flex-shrink: 0;
 }
