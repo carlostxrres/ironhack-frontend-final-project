@@ -112,12 +112,12 @@ const nextMonth = () => {
 <template>
   <div>
     <header>
-      <button @click="prevMonth">
-        <IconArrowLeft />
+      <button @click="prevMonth" class="button-tertiary button-icon">
+        <IconArrowLeft size="18" />
       </button>
-      <h2>{{ monthData.monthName }} {{ currentYear }}</h2>
-      <button @click="nextMonth">
-        <IconArrowRight />
+      <h3>{{ monthData.monthName }} {{ currentYear }}</h3>
+      <button @click="nextMonth" class="button-tertiary button-icon">
+        <IconArrowRight size="18" />
       </button>
     </header>
     <ol>
@@ -152,6 +152,8 @@ ul {
 ol {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: auto repeat(6, 1fr);
+  border: 1px solid #eee;
 }
 
 .day-name {
@@ -196,18 +198,12 @@ ol {
 header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 h2 {
   margin-bottom: 4px;
   padding: 0;
-}
-
-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.5ch;
 }
 
 .first-day {
