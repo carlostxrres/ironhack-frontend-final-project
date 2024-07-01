@@ -12,7 +12,7 @@ const date = new Date().toLocaleDateString('en-US', {
 
 <template>
   <header class="page-header">
-    <h1>To do app</h1>
+    <h2>To do app</h2>
     <p>{{ date }}</p>
   </header>
 </template>

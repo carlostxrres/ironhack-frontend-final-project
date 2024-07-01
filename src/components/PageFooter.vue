@@ -52,5 +52,3 @@ const greeting = getGreeting();
     <button @click="logOut" class="button-tertiary" v-if="isLoggedIn()">Log out</button>
   </footer>
 </template>
-
-<style></style>
