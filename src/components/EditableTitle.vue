@@ -95,10 +95,10 @@ const startEditing = () => {
 .edit-button {
   opacity: 0;
   transition: opacity var(--transition-fast);
-  padding: .2rem;
+  padding: var(--padding-block);
   aspect-ratio: 1;
   position: absolute;
-  transform: translateX(-100%);
+  transform: translateX(calc(-100% - var(--padding-inline)));
 }
 .editable-wrap:hover .edit-button{
   opacity: 1;
@@ -106,6 +106,8 @@ const startEditing = () => {
 .editable-wrap {
   display: flex;
   align-items: center;
+  --padding-inline: 0.4rem;
+  --padding-block: 0.2rem;
 }
 .title-display {
   line-height: 1.5rem;
@@ -119,8 +121,9 @@ const startEditing = () => {
   padding: 0;
   background: none;
 
-  padding: 0.2rem 0.4rem;
+  padding: var(--padding-block) var(--padding-inline);
   border-radius: var(--border-radius-small);
+  transform: translateX(calc(-1 * var(--padding-inline)));
 
   transition: background-color var(--transition-fast);
 }
