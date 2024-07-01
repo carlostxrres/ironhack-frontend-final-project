@@ -19,8 +19,8 @@ const isComplete = ref(task.is_complete);
 
 watch(
   () => isComplete.value,
-  newValue => {
-    taskStore.updateComplete(newValue, task, toasterStore)
+  (newValue) => {
+    taskStore.updateComplete(newValue, task, toasterStore);
   }
 );
 
@@ -67,25 +67,30 @@ const deleteTask = async () => {
     </div>
     -->
     <!-- <CheckboxComponent value="isComplete" v-model="isComplete" /> -->
-    <input type="checkbox" v-model="isComplete" />
-    <div>
+    <label>
+      <input type="checkbox" v-model="isComplete" />
+    </label>
+    <div class="task-content">
       <EditableTitle :title="task.title" :id="task.id" />
-      <small>{{ displayDate }}</small>
+      <div class="icon-cell">
+        <small>{{ displayDate }}</small>
+        <button class="button-icon button-tertiary" @click="deleteTask">
+          <IconTrash size="18" />
+        </button>
+        <RouterLink :to="'./tasks/' + task.id">
+          <IconArrowRight size="18" />
+        </RouterLink>
+      </div>
     </div>
-    <div class="icon-cell">
-      <button class="button-icon button-tertiary" @click="deleteTask">
-        <IconTrash size="18" />
-      </button>
-      <RouterLink :to="'./tasks/' + task.id">
-        <IconArrowRight size="18" />
-      </RouterLink>
-    </div>
-    <ToastComponent />
   </article>
 </template>
 
 <style>
 /* */
+.task-content {
+  display: flex;
+  flex-direction: column;
+}
 
 .task {
   padding-block: 0.8rem;
