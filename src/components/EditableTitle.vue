@@ -21,7 +21,7 @@ const props = defineProps({
 const isEditing = ref(false);
 const titleValue = ref(props.title);
 const titleInDatabase = ref(props.title);
-const inputRef = ref(null);
+const titleRef = ref(null);
 
 const updateTitle = async (newTitle) => {
   const response = await taskStore.updateTask({
@@ -50,53 +50,46 @@ const updateTitle = async (newTitle) => {
   taskStore.fetchTasks();
 };
 
-const toggleEditMode = () => {
-  isEditing.value = !isEditing.value;
-
-  if (isEditing.value) {
-    nextTick().then(() => inputRef.value.focus());
-  } else if (titleValue.value === titleInDatabase.value) {
-    return;
+const handleEdit = () => {
+  isEditing.value = false;
+  const newTitle = event.target.innerText.trim();
+  if (newTitle && newTitle !== titleInDatabase.value) {
+    titleValue.value = newTitle;
+    updateTitle(newTitle);
   } else {
-    updateTitle(titleValue.value);
+    titleValue.value = titleInDatabase.value;
   }
 };
+
+const startEditing = () => {
+  isEditing.value = true;
+  nextTick(() => titleRef.value.focus());
+};
+
 </script>
 
 <template>
-  <div class="editable-title">
-    <IconPencil
-      size="16"
-      :class="{ 'edit-icon': true, 'highlighted-icon': isEditing }"
-      @click="toggleEditMode"
-    />
-
-    <input
-      v-show="isEditing"
-      ref="inputRef"
-      type="text"
-      class="title-input"
-      v-model="titleValue"
-      @blur="toggleEditMode"
-      @keyup.enter="toggleEditMode"
-    />
-
-    <h4 v-show="!isEditing" class="title-display">{{ titleValue }}</h4>
+  <div class="icon-entry">
+    <button
+      :class="{ 'button-tertiary': true, 'button-icon': true, 'button-active': isEditing }"
+      @click="startEditing"
+    >
+      <IconPencil size="16" />
+    </button>
+    <h4
+      ref="titleRef"
+      class="title-display"
+      :contentEditable="isEditing"
+      :class="{ editable: isEditing }"
+      @blur="handleEdit"
+      @keyup.enter.prevent="handleEdit"
+    >
+      {{ titleValue }}
+    </h4>
   </div>
 </template>
 
 <style>
-.editable-title {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.edit-icon {
-  cursor: pointer;
-}
-
-input[type="text"].title-input,
 .title-display {
   line-height: 1.5rem;
   color: var(--primary-color-1);
@@ -108,20 +101,19 @@ input[type="text"].title-input,
   outline: none;
   padding: 0;
   background: none;
+
+  padding: 0.2rem 0.4rem;
+  border-radius: var(--border-radius-small);
+
+  transition: background-color var(--transition-fast);
 }
 
-input[type="text"].title-input {
-  width: 8rem;
-  display: block;
-  background: transparent;
-  font-size: 1rem;
-  background-color: transparent;
-  padding: 0;
+.title-display.editable {
   font-style: italic;
-  outline: none;
+  background-color: var(--color-background);
 }
 
-.highlighted-icon {
-  color: var(--secondary-color-1);
+.button-active {
+  border-color: var(--color-primary-1);
 }
 </style>
