@@ -55,4 +55,9 @@ const submitForm = (event) => {
     flex-direction: row;
   }
 }
+
+.form-inline {
+  flex-direction: row;
+  justify-content: space-between;
+}
 </style>

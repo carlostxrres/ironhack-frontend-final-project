@@ -26,13 +26,18 @@ input {
 
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="number"] {
   padding: var(--padding-normal);
   border: none;
   border-radius: 0.2rem;
   background-color: var(--color-background);
   outline: 2px solid transparent;
   transition: outline-color var(--transition-slow);
+}
+
+input[type="number"] {
+  max-width: 7rem;
 }
 
 input:focus-within {
@@ -136,7 +141,8 @@ a.discreet-anchor {
 }
 
 a.disabled,
-button.disabled {
+button.disabled,
+.disabled {
   pointer-events: none;
   cursor: not-allowed;
   opacity: 0.5;
