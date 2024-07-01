@@ -100,17 +100,92 @@ const toggleTimer = () => {
 // [x] Completed
 // Set timer: mins 1 2 5 10 20
 //            hour 1 2
+
+// to do: skeleton loader?
+// make info appear smoothly
+
+// event: id color date title
+
 </script>
 
-<script setup></script>
 <template>
-  <DialogComponent title="Create task" :onOpen="focusOnInput">
-    <div>task id: {{ taskId }}</div>
+  <DialogComponent :title="task?.title || 'Task ' + taskId">
+    <div v-if="task">
+      <small>Created {{ getTimeAgo(task.inserted_at) }}</small>
+      <EditableTitle :title="task.title" :id="task.id" />
+      <label class="icon-entry">
+        <input type="checkbox" v-model="isComplete" @change="updateTask" />
+        <span>{{ isComplete ? "Completed" : "Incomplete" }}</span>
+      </label>
+    </div>
 
-    <TimerComponent duration="300" />
+    <div v-else>
+      <p>Loading...</p>
+      <p>Task ID: {{ taskId }}</p>
+      <p>Created on: ...</p>
+    </div>
+
+    <HorizontalRule />
+
+    <div class="task-tools-section">
+      <DetailsComponent>
+        <template v-slot:summary>Timer</template>
+        <template v-slot:content>
+          <FormComponent @submitForm="toggleTimer" class="form-inline">
+            <input
+              type="number"
+              placeholder="Minutes"
+              min="0"
+              max="1440"
+              v-model="timerDuration"
+              :class="{ disabled: isTimerOn }"
+              ref="inputTimerMinutes"
+            />
+            <button
+              type="submit"
+              class="button-secondary"
+              :class="{ disabled: timerDuration < 1 }"
+            >
+              {{ isTimerOn ? "Remove" : "Set" }} timer
+            </button>
+          </FormComponent>
+
+          <Transition name="timer">
+            <TimerComponent :duration="timerDuration" v-if="isTimerOn" />
+          </Transition>
+        </template>
+      </DetailsComponent>
+
+      <DetailsComponent>
+        <template v-slot:summary>Calendar</template>
+        <template v-slot:content v-if="task">
+          <small>Created on {{ getDisplayDate(task.inserted_at) }}</small>
+          <CalendarComponent :events="calendarEvents" />
+        </template>
+      </DetailsComponent>
+    </div>
   </DialogComponent>
 
   <div style="position: relative">
     <ToastComponent />
   </div>
 </template>
+
+<style>
+.timer-enter-from,
+.timer-leave-to {
+  /* transform: translateY(100%); */
+  opacity: 0;
+}
+
+.timer-enter-active,
+.timer-leave-active {
+  transition: transform var(--transition-slow), opacity var(--transition-slow);
+}
+
+.task-tools-section {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+</style>
