@@ -8,22 +8,12 @@ import { useTaskStore } from "@/stores/task.js";
 import useToasterStore from "@/stores/toaster.js";
 import ToastComponent from "@/components/ToastComponent.vue";
 import EditableTitle from "@/components/EditableTitle.vue";
+import { getDisplayDate } from "@/services/datetime.js";
 
 const { task } = defineProps(["task"]);
 
 const taskStore = useTaskStore();
 const toasterStore = useToasterStore();
-
-const getDisplayDate = (date) => {
-  const options = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-  };
-  return new Date(date).toLocaleDateString("en-US", options);
-};
 
 const displayDate = ref(getDisplayDate(task.inserted_at));
 const isComplete = ref(task.is_complete);
