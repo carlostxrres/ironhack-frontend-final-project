@@ -1,58 +1,57 @@
 <script setup>
-import FormComponent from '@/components/FormComponent.vue'
-import { useTaskStore } from '@/stores/task.js'
-import useToasterStore from '@/stores/toaster.js'
-import { validateForm, errorUi } from '@/services/validateForm.js'
-import { ref, computed } from 'vue'
-import router from '@/router/index.js'
-import ToastComponent from '@/components/ToastComponent.vue'
-import DialogComponent from '@/components/DialogComponent.vue'
+import FormComponent from "@/components/FormComponent.vue";
+import { useTaskStore } from "@/stores/task.js";
+import useToasterStore from "@/stores/toaster.js";
+import { validateForm, errorUi } from "@/services/validateForm.js";
+import { ref, computed } from "vue";
+import router from "@/router/index.js";
+import DialogComponent from "@/components/DialogComponent.vue";
 
-const toasterStore = useToasterStore()
-const taskStore = useTaskStore()
-const taskName = ref('')
-const taskNameInput = ref(null)
+const toasterStore = useToasterStore();
+const taskStore = useTaskStore();
+const taskName = ref("");
+const taskNameInput = ref(null);
 
 const focusOnInput = () => {
-  taskNameInput.value.focus()
-}
+  taskNameInput.value.focus();
+};
 
-const shouldButtonBeDisabled = computed(() => taskName.value.trim().length < 1)
+const shouldButtonBeDisabled = computed(() => taskName.value.trim().length < 1);
 
 const createTask = async (submitEvent) => {
-  const form = submitEvent.target
+  const form = submitEvent.target;
 
-  const formData = new FormData(form)
+  const formData = new FormData(form);
 
-  const { areAllValid, validationResults } = validateForm(formData)
+  const { areAllValid, validationResults } = validateForm(formData);
 
   if (!areAllValid) {
-    const firstError = validationResults.find((result) => !result.meets)
-    errorUi(firstError, toasterStore)
-    return
+    const firstError = validationResults.find((result) => !result.meets);
+    errorUi(firstError, toasterStore);
+    return;
   }
 
-  const response = await taskStore.createTask({ title: taskName.value })
+  const response = await taskStore.createTask({ title: taskName.value });
   if (response.error) {
-    console.error('Error creating task:', response.error)
+    console.error("Error creating task:", response.error);
     toasterStore.error({
-      title: 'Task could not be created',
-      text: response.error
-    })
-    return
+      title: "Task could not be created",
+      text: response.error,
+    });
+    return;
   }
 
-  taskName.value = ''
+  taskName.value = "";
 
   toasterStore.success({
-    title: 'Task created',
-    text: 'You can now see it in your tasks list.',
-    timeout: 4000
-  })
+    title: "Task created",
+    text: "You can now see it in your tasks list.",
+    timeout: 4000,
+  });
 
-  await taskStore.fetchTasks()
-  router.push({ path: '/tasks' })
-}
+  await taskStore.fetchTasks();
+  router.push({ path: "/tasks" });
+};
 </script>
 <template>
   <DialogComponent title="Create task" :onOpen="focusOnInput">
@@ -69,13 +68,13 @@ const createTask = async (submitEvent) => {
           />
         </label>
       </fieldset>
-      <button type="submit" class="button-primary" :class="{ disabled: shouldButtonBeDisabled }">
+      <button
+        type="submit"
+        class="button-primary"
+        :class="{ disabled: shouldButtonBeDisabled }"
+      >
         Create it!
       </button>
     </FormComponent>
   </DialogComponent>
-
-  <div style="position: relative">
-    <ToastComponent />
-  </div>
 </template>

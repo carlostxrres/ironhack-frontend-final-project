@@ -1,7 +1,4 @@
 <script setup>
-// Display current date
-// Display email of the user
-
 const date = new Date().toLocaleDateString('en-US', {
   month: 'long',
   day: 'numeric',
@@ -16,5 +13,3 @@ const date = new Date().toLocaleDateString('en-US', {
     <p>{{ date }}</p>
   </header>
 </template>
-
-<style></style>

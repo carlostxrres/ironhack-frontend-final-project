@@ -63,8 +63,6 @@ const onSubmit = async (submitEvent) => {
     // To do: navigate somewhere else
   }
 }
-
-//
 </script>
 
 <template>

@@ -11,21 +11,12 @@ import { getUser } from '@/services/session.js'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-
 const user = getUser()
-console.log(user)
+
+// If no user, just go redirect to sign-in view
 if (!user) {
   router.push('/sign-in')
 }
-
-// const router = useRouter();
-// const userStore = useUserStore()
-// const toasterStore = useToasterStore()
-// const navigateToCreateTask = () => {
-//   router.push("create");
-// };
-
-// to do: if no user in localStorage, just go redirect to sign-in view
 </script>
 
 <template>
