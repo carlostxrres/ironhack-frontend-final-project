@@ -1,45 +1,45 @@
 <script setup>
-import IconArrowLeft from "@/components/icons/IconArrowLeft.vue";
-import { ref, onMounted } from "vue";
-import router from "@/router/index.js";
+import IconArrowLeft from '@/components/icons/IconArrowLeft.vue'
+import { ref, onMounted } from 'vue'
+import router from '@/router/index.js'
 
 const props = defineProps({
   title: {
     type: String,
-    required: false,
+    required: false
   },
   onOpen: {
     type: Function,
-    required: false,
-  },
-});
+    required: false
+  }
+})
 
-const dialog = ref(null);
+const dialog = ref(null)
 
 onMounted(() => {
-  dialog.value.showModal();
+  dialog.value.showModal()
   // dialog.value.style.maxHeight = "100dvh";
   // dialog.value.style.minHeight = "40dvh";
-  dialog.value.classList.add("open");
+  dialog.value.classList.add('open')
 
   if (props.onOpen) {
-    props.onOpen();
+    props.onOpen()
   }
 
   // dialog.value.addEventListener("close", () => {
   //   // to do: add some closing animation here
   //   router.push({ path: "/tasks" });
   // });
-});
+})
 const closeDialog = () => {
-  dialog.value.addEventListener("transitionend", (transitionEvent) => {
-    if (transitionEvent.propertyName === "bottom") {
-      dialog.value.close();
-      router.push({ path: "/tasks" });
+  dialog.value.addEventListener('transitionend', (transitionEvent) => {
+    if (transitionEvent.propertyName === 'bottom') {
+      dialog.value.close()
+      router.push({ path: '/tasks' })
     }
-  });
-  dialog.value.classList.remove("open");
-};
+  })
+  dialog.value.classList.remove('open')
+}
 </script>
 <template>
   <dialog ref="dialog" class="dialog">

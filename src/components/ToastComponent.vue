@@ -1,19 +1,15 @@
 <script setup>
-import useToasterStore from "@/stores/toaster.js";
-import IconError from "@/components/icons/IconError.vue";
-import IconCheck from "@/components/icons/IconCheck.vue";
+import useToasterStore from '@/stores/toaster.js'
+import IconError from '@/components/icons/IconError.vue'
+import IconCheck from '@/components/icons/IconCheck.vue'
 
-const toastStore = useToasterStore();
+const toastStore = useToasterStore()
 </script>
 
 <template>
   <ul v-if="toastStore.toasts.length" class="toaster-wrap">
     <TransitionGroup name="toast">
-      <li
-        v-for="toast in toastStore.toasts"
-        :class="['toast', toast.status]"
-        :key="toast.text"
-      >
+      <li v-for="toast in toastStore.toasts" :class="['toast', toast.status]" :key="toast.text">
         <IconError v-if="toast.status === 'error'" class="toast-icon" />
         <IconCheck v-else-if="toast.status === 'success'" class="toast-icon" />
         <h4>{{ toast.title }}</h4>
@@ -33,7 +29,9 @@ const toastStore = useToasterStore();
 
 .toast-enter-active,
 .toast-leave-active {
-  transition: transform var(--transition-slow), opacity var(--transition-slow);
+  transition:
+    transform var(--transition-slow),
+    opacity var(--transition-slow);
 }
 
 .toaster-wrap {
@@ -85,8 +83,8 @@ const toastStore = useToasterStore();
 .toast {
   display: grid;
   grid-template-areas:
-    "icon titl close"
-    ".    text text";
+    'icon titl close'
+    '.    text text';
   grid-template-columns: auto 1fr auto;
   gap: 0 0.5rem;
   border: 1px solid var(--color);

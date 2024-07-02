@@ -1,66 +1,66 @@
 <script setup>
-import { ref, defineProps, onMounted, computed } from "vue";
-import IconPlayFilled from "@/components/icons/IconPlayFilled.vue";
-import IconPauseFilled from "@/components/icons/IconPauseFilled.vue";
-import IconPreviousFilled from "@/components/icons/IconPreviousFilled.vue";
+import { ref, defineProps, onMounted, computed } from 'vue'
+import IconPlayFilled from '@/components/icons/IconPlayFilled.vue'
+import IconPauseFilled from '@/components/icons/IconPauseFilled.vue'
+import IconPreviousFilled from '@/components/icons/IconPreviousFilled.vue'
 
 const props = defineProps({
   duration: {
     type: Number,
     required: false,
-    default: 60,
+    default: 60
   },
   startOnMount: {
     type: Boolean,
     required: false,
-    default: false,
-  },
-});
+    default: false
+  }
+})
 
-const end = ref(null);
-const remaining = ref(0);
+const end = ref(null)
+const remaining = ref(0)
 
-const min = computed(() => Math.floor(remaining.value / 60000));
-const sec = computed(() => pad(Math.floor((remaining.value / 1000) % 60)));
-const hun = computed(() => pad(Math.floor((remaining.value % 1000) / 10)));
+const min = computed(() => Math.floor(remaining.value / 60000))
+const sec = computed(() => pad(Math.floor((remaining.value / 1000) % 60)))
+const hun = computed(() => pad(Math.floor((remaining.value % 1000) / 10)))
 
 const tick = () => {
   if (!getIsRunning()) {
-    return;
+    return
   }
-  remaining.value = Math.max(0, end.value - Date.now());
-  requestAnimationFrame(tick);
-};
+  remaining.value = Math.max(0, end.value - Date.now())
+  requestAnimationFrame(tick)
+}
 
 const start = () => {
-  end.value = Date.now() + remaining.value;
-  tick();
-};
+  end.value = Date.now() + remaining.value
+  tick()
+}
 
 const pause = () => {
-  end.value = null;
-};
+  end.value = null
+}
 
 const reset = () => {
-  const isRunning = getIsRunning(); // Has to be taken before resetting the values
-  remaining.value = props.duration * 60000;
-  end.value = isRunning ? Date.now() + remaining.value : null;
-};
+  const isRunning = getIsRunning() // Has to be taken before resetting the values
+  remaining.value = props.duration * 60000
+  end.value = isRunning ? Date.now() + remaining.value : null
+}
 
 const getIsRunning = () => {
-  return end.value && remaining.value;
-};
+  return end.value && remaining.value
+}
 
 const pad = (value) => {
-  return String(value).padStart(2, "0");
-};
+  return String(value).padStart(2, '0')
+}
 
 onMounted(() => {
-  reset();
+  reset()
   if (props.startOnMount) {
-    start();
+    start()
   }
-});
+})
 </script>
 
 <template>

@@ -1,42 +1,40 @@
 <script setup>
-import TaskComponent from "@/components/TaskComponent.vue";
-import FilterField from "@/components/FilterField.vue";
-import { ref, computed } from "vue";
-import { useTaskStore } from "@/stores/task.js";
+import TaskComponent from '@/components/TaskComponent.vue'
+import FilterField from '@/components/FilterField.vue'
+import { ref, computed } from 'vue'
+import { useTaskStore } from '@/stores/task.js'
 
-const taskStore = useTaskStore();
+const taskStore = useTaskStore()
 
-taskStore.fetchTasks();
+taskStore.fetchTasks()
 
-const filterValue = ref("");
+const filterValue = ref('')
 
 const filteredTasks = computed(() => {
-  const curatedFilterValue = filterValue.value.trim().toLowerCase();
+  const curatedFilterValue = filterValue.value.trim().toLowerCase()
   if (!curatedFilterValue) {
-    return taskStore.tasks;
+    return taskStore.tasks
   }
 
-  return taskStore.tasks.filter((task) =>
-    task.title.toLowerCase().includes(curatedFilterValue)
-  );
-});
+  return taskStore.tasks.filter((task) => task.title.toLowerCase().includes(curatedFilterValue))
+})
 
 const taskCounts = computed(() => {
-  const tasks = taskStore.tasks;
-  const tasksNum = tasks.length;
-  const completed = tasks.filter((task) => task.is_complete).length;
-  const incomplete = tasksNum - completed;
+  const tasks = taskStore.tasks
+  const tasksNum = tasks.length
+  const completed = tasks.filter((task) => task.is_complete).length
+  const incomplete = tasksNum - completed
 
   return {
     tasksNum,
     completed,
-    incomplete,
-  };
-});
+    incomplete
+  }
+})
 
 const getPluralSuffix = (num) => {
-  return num === 1 ? "" : "s";
-};
+  return num === 1 ? '' : 's'
+}
 </script>
 
 <template>

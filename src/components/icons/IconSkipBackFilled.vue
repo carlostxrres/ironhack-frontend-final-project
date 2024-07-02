@@ -1,5 +1,5 @@
 <script setup>
-const { size } = defineProps(["size"]);
+const { size } = defineProps(['size'])
 </script>
 
 <template>

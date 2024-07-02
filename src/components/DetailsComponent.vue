@@ -1,5 +1,5 @@
 <script setup>
-import IconChevronDown from "@/components/icons/IconChevronDown.vue";
+import IconChevronDown from '@/components/icons/IconChevronDown.vue'
 </script>
 
 <template>
@@ -36,7 +36,7 @@ import IconChevronDown from "@/components/icons/IconChevronDown.vue";
 }
 
 .details-summary:hover {
-  filter: brightness(.95);
+  filter: brightness(0.95);
 }
 
 details > .details-summary svg {

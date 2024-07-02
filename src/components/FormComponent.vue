@@ -1,9 +1,9 @@
 <script setup>
-const emit = defineEmits(["submitForm"]);
+const emit = defineEmits(['submitForm'])
 
 const submitForm = (event) => {
-  emit("submitForm", event);
-};
+  emit('submitForm', event)
+}
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup>
-const { size, strokeWidth } = defineProps(["size", "strokeWidth"]);
+const { size, strokeWidth } = defineProps(['size', 'strokeWidth'])
 </script>
 
 <template>

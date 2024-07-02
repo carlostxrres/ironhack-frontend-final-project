@@ -1,70 +1,70 @@
 <script setup>
-import { ref, defineProps, nextTick } from "vue";
-import IconPencil from "./icons/IconPencil.vue";
-import { useTaskStore } from "@/stores/task.js";
-import useToasterStore from "@/stores/toaster.js";
+import { ref, defineProps, nextTick } from 'vue'
+import IconPencil from './icons/IconPencil.vue'
+import { useTaskStore } from '@/stores/task.js'
+import useToasterStore from '@/stores/toaster.js'
 
-const taskStore = useTaskStore();
-const toasterStore = useToasterStore();
+const taskStore = useTaskStore()
+const toasterStore = useToasterStore()
 
 const props = defineProps({
   title: {
     type: String,
-    required: true,
+    required: true
   },
   id: {
     type: Number,
-    required: true,
-  },
-});
+    required: true
+  }
+})
 
-const isEditing = ref(false);
-const titleValue = ref(props.title);
-const titleInDatabase = ref(props.title);
-const titleRef = ref(null);
+const isEditing = ref(false)
+const titleValue = ref(props.title)
+const titleInDatabase = ref(props.title)
+const titleRef = ref(null)
 
 const updateTitle = async (newTitle) => {
   const response = await taskStore.updateTask({
     id: props.id,
     update: {
-      title: newTitle,
-    },
-  });
+      title: newTitle
+    }
+  })
 
   if (response.error) {
-    console.error("Error renaming task:", response.error);
+    console.error('Error renaming task:', response.error)
     toasterStore.error({
       title: `Your task could not be renamed to "${newTitle}"`,
-      text: response.error,
-    });
-    return;
+      text: response.error
+    })
+    return
   }
 
-  titleInDatabase.value = newTitle;
+  titleInDatabase.value = newTitle
   toasterStore.success({
-    title: "Task renamed",
+    title: 'Task renamed',
     text: `Your task was renamed to "${newTitle}".`,
-    timeout: 4000,
-  });
+    timeout: 4000
+  })
 
-  taskStore.fetchTasks();
-};
+  taskStore.fetchTasks()
+}
 
 const handleEdit = () => {
-  isEditing.value = false;
-  const newTitle = event.target.innerText.trim();
+  isEditing.value = false
+  const newTitle = event.target.innerText.trim()
   if (newTitle && newTitle !== titleInDatabase.value) {
-    titleValue.value = newTitle;
-    updateTitle(newTitle);
+    titleValue.value = newTitle
+    updateTitle(newTitle)
   } else {
-    titleValue.value = titleInDatabase.value;
+    titleValue.value = titleInDatabase.value
   }
-};
+}
 
 const startEditing = () => {
-  isEditing.value = true;
-  nextTick(() => titleRef.value.focus());
-};
+  isEditing.value = true
+  nextTick(() => titleRef.value.focus())
+}
 </script>
 
 <template>
@@ -72,7 +72,7 @@ const startEditing = () => {
     <button
       :class="{
         'edit-button': true,
-        'button-active': isEditing,
+        'button-active': isEditing
       }"
       @click="startEditing"
     >
@@ -100,14 +100,14 @@ const startEditing = () => {
   position: absolute;
   transform: translateX(calc(-100% - var(--padding-inline)));
 }
-.editable-wrap:hover .edit-button{
+.editable-wrap:hover .edit-button {
   opacity: 1;
 }
 .editable-wrap {
   display: flex;
   align-items: center;
-  --padding-inline: .4rem;
-  --padding-block: .2rem;
+  --padding-inline: 0.4rem;
+  --padding-block: 0.2rem;
 }
 .title-display {
   line-height: 1.5rem;
