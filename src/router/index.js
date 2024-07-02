@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { nextTick } from 'vue'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import SignUp from '../views/SignUp.vue'
@@ -13,47 +14,54 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'Home',
       component: HomeView
     },
     {
       path: '/about',
-      name: 'about',
+      name: 'About',
       component: AboutView
     },
     {
       path: '/sign-up',
-      name: 'sign-up',
+      name: 'Sign up',
       component: SignUp
     },
     {
       path: '/sign-in',
-      name: 'sign-in',
+      name: 'Sign in',
       component: LogIn
     },
     {
       path: '/tasks',
-      name: 'tasks',
+      name: 'Tasks',
       component: TasksView,
       children: [
         {
           path: '/tasks/create',
-          name: 'create',
+          name: 'Create task',
           component: CreateTask
         },
         {
           path: '/tasks/:taskId',
-          name: 'task',
+          name: 'Task details',
           component: TaskView
         }
       ]
     },
     {
-        path: '/:catchAll(.*)',
-        name: 'Not found',
-        component: NotFound,
-    },
+      path: '/:catchAll(.*)',
+      name: 'Not found',
+      component: NotFound
+    }
   ]
+})
+
+router.afterEach(() => {
+  nextTick(() => {
+    const name = router.currentRoute.value.name
+    document.title = name ? `To do app - ${name}` : 'To do app'
+  })
 })
 
 export default router
