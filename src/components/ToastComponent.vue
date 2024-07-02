@@ -7,23 +7,21 @@ const toastStore = useToasterStore();
 </script>
 
 <template>
-  <Transition name="toast">
-    <div v-if="toastStore.toasts.length" class="toaster-wrap">
-      <TransitionGroup name="toast" tag="ul">
-        <li
-          v-for="toast in toastStore.toasts"
-          :class="['toast', toast.status]"
-          :key="toast.text"
-        >
-          <IconError v-if="toast.status === 'error'" class="toast-icon" />
-          <IconCheck v-else-if="toast.status === 'success'" class="toast-icon" />
-          <h4>{{ toast.title }}</h4>
-          <p class="toast-text">{{ toast.text }}</p>
-          <button @click="toastStore.removeToast(toast.id)">&times;</button>
-        </li>
-      </TransitionGroup>
-    </div>
-  </Transition>
+  <ul v-if="toastStore.toasts.length" class="toaster-wrap">
+    <TransitionGroup name="toast">
+      <li
+        v-for="toast in toastStore.toasts"
+        :class="['toast', toast.status]"
+        :key="toast.text"
+      >
+        <IconError v-if="toast.status === 'error'" class="toast-icon" />
+        <IconCheck v-else-if="toast.status === 'success'" class="toast-icon" />
+        <h4>{{ toast.title }}</h4>
+        <p class="toast-text">{{ toast.text }}</p>
+        <button @click="toastStore.removeToast(toast.id)">&times;</button>
+      </li>
+    </TransitionGroup>
+  </ul>
 </template>
 
 <style scoped>
@@ -38,7 +36,7 @@ const toastStore = useToasterStore();
   transition: transform var(--transition-slow), opacity var(--transition-slow);
 }
 
-.toaster-wrap ul {
+.toaster-wrap {
   position: fixed;
   inset: 1rem 1rem auto 1rem;
   z-index: 1;
