@@ -69,7 +69,7 @@ const getPluralSuffix = (num) => {
   </p>
 
   <ul class="tasks-list">
-    <TaskComponent v-for="(task, index) in filteredTasks" :key="task.id" :task="task" />
+    <TaskComponent v-for="task in filteredTasks" :key="task.id" :task="task" />
   </ul>
 </template>
 
