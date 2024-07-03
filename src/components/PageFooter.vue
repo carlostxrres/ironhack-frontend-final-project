@@ -48,7 +48,48 @@ const greeting = getGreeting()
 
 <template>
   <footer class="page-footer">
-    <p>{{ greeting }}</p>
+    <div class="footer-text">
+      <p>{{ greeting }}</p>
+      <ul class="footer-links">
+        <li>
+          <RouterLink to="/about" class="discreet-anchor semi-discreet-anchor">About</RouterLink>
+        </li>
+        <li>
+          <a
+            href="https://github.com/carlostxrres/ironhack-frontend-final-project"
+            target="_blank"
+            class="discreet-anchor semi-discreet-anchor"
+          >
+            GitHub</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://github.com/carlostxrres"
+            target="_blank"
+            class="discreet-anchor semi-discreet-anchor"
+            >Author</a
+          >
+        </li>
+      </ul>
+    </div>
     <button @click="logOut" class="button-tertiary" v-if="isLoggedIn()">Log out</button>
   </footer>
 </template>
+
+<style>
+.footer-text {
+  color: var(--color-text-4);
+  font-size: 0.9rem;
+}
+
+.footer-links {
+  display: flex;
+  font-size: 0.8rem;
+}
+.footer-links > li:not(:last-child)::after {
+  content: '·';
+  margin-inline: 0.5rem;
+  color: var(--color-text-4);
+}
+</style>
