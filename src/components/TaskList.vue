@@ -40,19 +40,6 @@ const getPluralSuffix = (num) => {
 <template>
   <FilterField v-model="filterValue" placeholder="Filter tasks..." />
 
-  <!-- <div class="actions-bar" v-if="taskCounts.tasksNum.length"> -->
-  <!--   <div> -->
-  <!--     <button class="button-icon button-secondary"> -->
-  <!--       <IconSortAscending size="16" strokeWidth="3" /> -->
-  <!--       to do: add tooltip -->
-  <!--     </button> -->
-  <!--     <button @click="taskStore.fetchTasks()" class="button-icon button-secondary"> -->
-  <!--       <IconRefresh size="16" strokeWidth="3" /> -->
-  <!--        to do: add tooltip  -->
-  <!--     </button> -->
-  <!--   </div> -->
-  <!-- </div> -->
-
   <p class="counts-sentence">
     <span v-if="!taskCounts.tasksNum">No tasks yet.</span>
     <span v-else>
