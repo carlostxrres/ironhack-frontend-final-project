@@ -1,30 +1,44 @@
 <script setup>
-import { useUserStore } from '../stores/user'
-import { useTaskStore } from '../stores/task'
-import { ref } from 'vue'
+import { onMounted } from 'vue'
+import { isLoggedIn } from '@/services/session.js'
+import router from '@/router/index.js'
+import IconLoader from '@/components/icons/IconLoader.vue'
 
-const userStore = useUserStore()
-const taskStore = useTaskStore()
-
-const email = ref('')
-const password = ref('')
+onMounted(() => {
+  if (isLoggedIn()) {
+    router.push('/tasks')
+  } else {
+    router.push('/sign-in')
+  }
+})
 </script>
 
 <template>
-  <h1>Home</h1>
-  <h2 v-if="userStore.user">Current User: {{ userStore.user.user.email }}</h2>
-
-  <input placeholder="Write your email" v-model="email" />
-  <input type="password" placeholder="Write your password" v-model="password" />
-  <button @click="userStore.createNewUser(email, password)">Create new User</button>
-
-  <br /><br />
-  <button @click="taskStore.fetchTasks()">fetch tasks</button>
-  <ul>
-    <li v-for="task in taskStore.tasks" :key="task.id">
-      {{ task.title }}
-    </li>
-  </ul>
+  <main class="centered">
+    <h1>Welcome!</h1>
+    <p>You should now be redirected somewhere...</p>
+    <IconLoader class="spinning" size="48" />
+  </main>
 </template>
 
-<style></style>
+<style>
+.centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 1rem;
+}
+.spinning {
+  animation: spin 800ms linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>
