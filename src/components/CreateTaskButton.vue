@@ -16,3 +16,9 @@ const isCreatingTask = computed(() => route.path.includes('create'))
     </label>
   </RouterLink>
 </template>
+
+<style>
+.new-task-button {
+  margin-top: 1rem;
+}
+</style>

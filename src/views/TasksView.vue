@@ -36,10 +36,6 @@ if (!user) {
 </template>
 
 <style>
-.new-task-button {
-  margin-block: 1rem;
-}
-
 .button-icon-wrap {
   display: flex;
   align-items: center;
