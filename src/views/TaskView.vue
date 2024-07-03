@@ -55,19 +55,16 @@ watch(() => route.params.taskId, getNewTaskData)
 
 watch(
   () => isComplete.value,
-  (newValue, oldValue) => {
+  async (newValue, oldValue) => {
     const isInitial = oldValue === null
     const didChange = newValue !== oldValue
 
     if (!isInitial && didChange) {
-      taskStore.updateComplete(newValue, task.value, toasterStore)
+      await taskStore.updateComplete(newValue, task.value, toasterStore)
+      taskStore.fetchTasks()
     }
   }
 )
-
-const setTimer = () => {
-  isTimerOn.value = true
-}
 
 const toggleTimer = () => {
   isTimerOn.value = !isTimerOn.value
@@ -80,7 +77,7 @@ const toggleTimer = () => {
   <DialogComponent :title="task?.title || 'Task ' + taskId">
     <div v-if="task">
       <small>Created {{ getTimeAgo(task.inserted_at) }}</small>
-      <EditableTitle :title="task.title" :id="task.id" />
+      <EditableTitle @titleUpdated="getNewTaskData" :title="task.title" :id="task.id" />
       <label class="icon-entry">
         <input type="checkbox" v-model="isComplete" @change="updateTask" />
         <span>{{ isComplete ? 'Completed' : 'Incomplete' }}</span>

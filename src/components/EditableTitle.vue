@@ -18,6 +18,8 @@ const props = defineProps({
   }
 })
 
+const emit = defineEmits(['titleUpdated'])
+
 const isEditing = ref(false)
 const titleValue = ref(props.title)
 const titleInDatabase = ref(props.title)
@@ -47,6 +49,7 @@ const updateTitle = async (newTitle) => {
     timeout: 4000
   })
 
+  emit('titleUpdated', newTitle)
   taskStore.fetchTasks()
 }
 
