@@ -20,6 +20,8 @@
   font-weight: bold;
 }
 
+
+/* Inputs */
 input {
   accent-color: var(--secondary-color-1);
 }
@@ -138,7 +140,8 @@ a {
 }
 
 a.discreet-anchor {
-  all: unset;
+  color: unset;
+  text-decoration: unset;
   cursor: pointer;
 }
 
