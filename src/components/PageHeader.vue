@@ -9,7 +9,7 @@ const date = new Date().toLocaleDateString('en-US', {
 
 <template>
   <header class="page-header">
-    <RouterLink class="discreet-anchor icon-entry" to="/tasks">
+    <RouterLink class="semi-discreet-anchor icon-entry" to="/tasks">
       <IconSword size="28" style="color: var(--primary-color-1)" />
       <h2>To do app</h2>
     </RouterLink>

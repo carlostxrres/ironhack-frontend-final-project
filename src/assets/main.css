@@ -136,14 +136,20 @@ h1 {
 
 
 a {
-  transition: opacity var(--transition-fast);
+  transition: opacity var(--transition-fast), color var(--transition-fast);
   color: var(--secondary-color-1);
 }
 
-a.discreet-anchor {
+a.discreet-anchor,
+a.semi-discreet-anchor {
   color: unset;
   text-decoration: unset;
   cursor: pointer;
+}
+
+a.semi-discreet-anchor:hover,
+a.semi-discreet-anchor:active {
+  color: var(--secondary-color-1);
 }
 
 a.disabled,
