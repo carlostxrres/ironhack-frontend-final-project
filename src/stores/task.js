@@ -12,7 +12,7 @@ export const useTaskStore = defineStore('taskStore', () => {
       .from('tasks')
       .select()
       .order('is_complete')
-      .order('inserted_at', { ascending: false})
+      .order('inserted_at', { ascending: false })
 
     if (error) {
       console.log('Error: ', error)
@@ -83,27 +83,27 @@ export const useTaskStore = defineStore('taskStore', () => {
     const response = await updateTask({
       id: task.id,
       update: {
-        is_complete: newValue,
-      },
-    });
+        is_complete: newValue
+      }
+    })
 
-    const newValueString = newValue ? "complete" : "incomplete";
+    const newValueString = newValue ? 'complete' : 'incomplete'
     if (response.error) {
-      console.error("Error updating task:", response.error);
+      console.error('Error updating task:', response.error)
       toasterStore.error({
         title: `The task "${task.title}" could not be set to "${newValueString}"`,
-        text: response.error,
-      });
-      return;
+        text: response.error
+      })
+      return
     }
 
     toasterStore.success({
-      title: "Task updated",
+      title: 'Task updated',
       text: `The task "${task.title}" was set to "${newValueString}".`,
-      timeout: 4000,
-    });
+      timeout: 4000
+    })
 
-    fetchTasks();
+    fetchTasks()
   }
 
   return { tasks, fetchTasks, createTask, deleteTask, updateTask, updateComplete }
