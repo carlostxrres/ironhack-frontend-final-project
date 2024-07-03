@@ -48,6 +48,7 @@ import ToastComponent from '@/components/ToastComponent.vue'
 .page-footer {
   margin-top: auto;
   border-top: 1px solid #ccc;
+  margin-top: calc(var(--margin-block) / 2);
 }
 
 .section {
