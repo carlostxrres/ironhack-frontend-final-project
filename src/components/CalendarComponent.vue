@@ -133,7 +133,14 @@ const nextMonth = () => {
         <div class="day-number">{{ day }}</div>
         <ul class="events-list" v-if="getEventsInDay(day).length">
           <li v-for="event in getEventsInDay(day)" :key="event.id">
-            <div :style="{ backgroundColor: event.color }" :title="event.title" class="event"></div>
+            <RouterLink
+              :to="`/tasks/${event.id}`"
+              :style="{ backgroundColor: event.color }"
+              :title="event.title"
+              class="discreet-anchor event"
+            >
+              &nbsp;
+            </RouterLink>
           </li>
         </ul>
       </li>
@@ -218,9 +225,10 @@ h2 {
 }
 
 .event {
-  border-radius: 4px;
-  height: 0.5rem;
-  width: 0.5rem;
+  border-radius: var(--border-radius-small);
+  width: 0.8rem;
+  height: 0.8rem;
   margin: 1px;
+  display: block;
 }
 </style>

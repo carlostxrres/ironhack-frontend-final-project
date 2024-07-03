@@ -15,7 +15,6 @@ import CalendarComponent from '@/components/CalendarComponent.vue'
 const route = useRoute()
 const taskStore = useTaskStore()
 const toasterStore = useToasterStore()
-const { taskId } = route.params
 
 const task = ref(null)
 const isComplete = ref(null)
@@ -25,7 +24,9 @@ const inputTimerMinutes = ref(null)
 
 const calendarEvents = ref([])
 
-const getNewTaskData = async () => {
+const getNewTaskData = async (a) => {
+  const { taskId } = route.params
+  console.log('navigating to', a)
   await taskStore.fetchTasks()
   const targetTask = taskStore.tasks.find((t) => t.id == taskId)
   if (!targetTask) {
@@ -74,7 +75,7 @@ const toggleTimer = () => {
 </script>
 
 <template>
-  <DialogComponent :title="task?.title || 'Task ' + taskId">
+  <DialogComponent :title="task?.title || 'Task'">
     <div v-if="task">
       <small>Created {{ getTimeAgo(task.inserted_at) }}</small>
       <EditableTitle @titleUpdated="getNewTaskData" :title="task.title" :id="task.id" />
@@ -86,7 +87,7 @@ const toggleTimer = () => {
 
     <div v-else>
       <p>Loading...</p>
-      <p>Task ID: {{ taskId }}</p>
+      <p>Task ID: ...</p>
       <p>Created on: ...</p>
     </div>
 
