@@ -27,7 +27,7 @@ const { path } = router.currentRoute.value
         </p>
         <RouterLink to="/tasks" class="icon-entry">
           <IconArrowLeft />
-          <span>Go back</span>
+          <span>Go see your tasks</span>
         </RouterLink>
       </div>
     </template>
