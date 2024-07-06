@@ -111,7 +111,7 @@ const nextMonth = () => {
 
 <template>
   <div>
-    <header>
+    <header class="calendar-header">
       <button @click="prevMonth" class="button-tertiary button-icon">
         <IconArrowLeft size="18" />
       </button>
@@ -120,7 +120,7 @@ const nextMonth = () => {
         <IconArrowRight size="18" />
       </button>
     </header>
-    <ol>
+    <ol class="calendar-grid">
       <li v-for="weekDayName in weekDayNames" :key="weekDayName" class="day-name">
         {{ weekDayName }}
       </li>
@@ -148,15 +148,15 @@ const nextMonth = () => {
   </div>
 </template>
 
-<style scoped>
-ol,
-ul {
+<style>
+.calendar-grid,
+.events-list {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-ol {
+.calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: auto repeat(6, 1fr);
@@ -202,15 +202,10 @@ ol {
   font-weight: bold;
 }
 
-header {
+.calendar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-h2 {
-  margin-bottom: 4px;
-  padding: 0;
 }
 
 .first-day {
