@@ -24,14 +24,13 @@ const inputTimerMinutes = ref(null)
 
 const calendarEvents = ref([])
 
-const getNewTaskData = async (a) => {
+const getNewTaskData = async () => {
   const { taskId } = route.params
-  console.log('navigating to', a)
   await taskStore.fetchTasks()
   const targetTask = taskStore.tasks.find((t) => t.id == taskId)
   if (!targetTask) {
     console.error('Task not found:', taskId)
-    // to do: show error in UI
+    // : show error in UI
     return
   }
 
