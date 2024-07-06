@@ -12,7 +12,7 @@ const { path } = router.currentRoute.value
   <SimpleLayout>
     <template v-slot:header> Oops... </template>
     <template v-slot:content>
-      <div class="asdasdasdasd">
+      <div class="not-found-content">
         <div>
           <p>
             <span class="big">4</span>
@@ -40,7 +40,7 @@ const { path } = router.currentRoute.value
   font-weight: 600;
 }
 
-.asdasdasdasd {
+.not-found-content {
   display: flex;
   flex-direction: column;
   align-items: center;

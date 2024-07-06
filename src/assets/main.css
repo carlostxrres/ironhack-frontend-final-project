@@ -163,14 +163,14 @@ button.disabled,
 /**/
 
 
-.asdasd {
+.gate-page-header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   gap: 2rem;
 }
 
-.asdasd>*:first-child {
+.gate-page-header>*:first-child {
   flex-shrink: 0;
 }
 
