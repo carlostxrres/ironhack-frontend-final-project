@@ -46,7 +46,7 @@ import ToastComponent from '@/components/ToastComponent.vue'
 }
 
 .page-footer {
-  margin-top: auto;
+  margin-top: auto !important;
   border-top: 1px solid #ccc;
   margin-top: calc(var(--margin-block) / 2);
 }
