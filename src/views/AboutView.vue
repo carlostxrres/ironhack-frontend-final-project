@@ -55,5 +55,3 @@ import HorizontalRule from '@/components/HorizontalRule.vue'
     </template>
   </SimpleLayout>
 </template>
-
-<style></style>

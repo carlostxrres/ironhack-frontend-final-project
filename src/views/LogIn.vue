@@ -84,5 +84,3 @@ const onSubmit = async (submitEvent) => {
     </template>
   </SimpleLayout>
 </template>
-
-<style></style>
