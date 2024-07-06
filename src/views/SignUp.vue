@@ -1,7 +1,6 @@
 <script setup>
 import { useUserStore } from '../stores/user'
 import useToasterStore from '@/stores/toaster.js'
-// import { useTaskStore } from '../stores/task'
 import { ref, onMounted } from 'vue'
 import router from '@/router/index.js'
 
@@ -14,7 +13,6 @@ import { ERROR_EXPLANATIONS } from '@/CONSTANTS.js'
 import { isLoggedIn } from '@/services/session.js'
 
 const userStore = useUserStore()
-// const taskStore = useTaskStore()
 const toasterStore = useToasterStore()
 
 const email = ref('')
@@ -59,8 +57,6 @@ const onSubmit = async (submitEvent) => {
       timeout: 4000
     })
     router.push('/tasks')
-    console.log(userStore.user)
-    // To do: navigate somewhere else
   }
 }
 </script>

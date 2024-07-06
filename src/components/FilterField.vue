@@ -29,7 +29,7 @@ const updateValue = (event) => {
 const clearValue = (event) => {
   event.preventDefault()
   emit('update:modelValue', '')
-  // this.$refs.inputField.focus()
+  this.$refs.inputField.focus()
 }
 </script>
 
@@ -51,29 +51,6 @@ const clearValue = (event) => {
       <IconX size="18" />
     </button>
   </label>
-
-  <!-- to do: create tooltip-component -->
-  <!--
-    <tooltip-component v-else :text="info" position="bottom">
-    <label class="input-text">
-      <icon-component icon="search" />
-      <input
-        ref="inputField"
-        type="text"
-        :placeholder="placeholder"
-        :value="value"
-        @input="updateValue"
-      />
-      <button
-        class="close-button"
-        :style="{ visibility: value.length > 0 ? 'visible' : 'hidden' }"
-        @click="clearValue"
-      >
-        <icon-component icon="backspace" />
-      </button>
-    </label>
-  </tooltip-component>
-  -->
 </template>
 
 <style scoped>

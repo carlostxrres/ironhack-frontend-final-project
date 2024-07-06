@@ -1,7 +1,4 @@
 <script setup>
-// import { useUserStore } from '../stores/user'
-// import { useToasterStore } from '@/stores/toaster.js'
-// import router from '@/router/index.js'
 import SimpleLayout from '@/components/SimpleLayout.vue'
 import TaskList from '@/components/TaskList.vue'
 import CreateTaskButton from '@/components/CreateTaskButton.vue'
@@ -23,7 +20,6 @@ if (!user) {
   <SimpleLayout>
     <template v-slot:header>
       <h1>Your tasks</h1>
-      <!-- to do: put the nav bar here in the header so it's sticky -->
     </template>
     <template v-slot:content>
       <TaskList />

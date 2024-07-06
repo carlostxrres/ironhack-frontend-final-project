@@ -1,8 +1,6 @@
 <script setup>
 import IconArrowRight from './icons/IconArrowRight.vue'
 import IconTrash from './icons/IconTrash.vue'
-// import IconBaseline from './icons/IconBaseline.vue'
-// import CheckboxComponent from "@/components/CheckboxComponent.vue";
 import { ref, watch } from 'vue'
 import { useTaskStore } from '@/stores/task.js'
 import useToasterStore from '@/stores/toaster.js'
@@ -23,13 +21,6 @@ watch(
     taskStore.updateComplete(newValue, task, toasterStore)
   }
 )
-
-// watch(
-//   () => task.inserted_at,
-//   (newValue) => {
-//     displayDate.value = getDisplayDate(newValue)
-//   }
-// )
 
 const deleteTask = async () => {
   const confirmation = confirm(`Are you sure you want to delete the task "${task.title}"?`)
@@ -59,12 +50,6 @@ const deleteTask = async () => {
 
 <template>
   <li :class="{ task: true, 'is-complete': isComplete }">
-    <!-- to drag and drop and reorder, later
-    <div class="task-lower">
-      <IconBaseline size="18" />
-    </div>
-    -->
-    <!-- <CheckboxComponent value="isComplete" v-model="isComplete" /> -->
     <label style="display: flex">
       <input type="checkbox" v-model="isComplete" />
     </label>

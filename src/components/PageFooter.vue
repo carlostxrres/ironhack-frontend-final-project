@@ -59,8 +59,7 @@ const greeting = getGreeting()
             href="https://github.com/carlostxrres/ironhack-frontend-final-project"
             target="_blank"
             class="discreet-anchor semi-discreet-anchor"
-          >
-            GitHub</a
+            >GitHub</a
           >
         </li>
         <li>

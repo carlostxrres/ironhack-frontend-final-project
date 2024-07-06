@@ -15,12 +15,11 @@ export const useTaskStore = defineStore('taskStore', () => {
       .order('inserted_at', { ascending: false })
 
     if (error) {
-      console.log('Error: ', error)
-      // to do: do something, show the type of error to the user
+      console.error('Error: ', error)
+      // to do: show the type of error to the user
     } else {
       tasks.value = data
     }
-    console.log('tasks: ', tasks.value)
   }
 
   const createTask = async ({ title }) => {
@@ -33,8 +32,6 @@ export const useTaskStore = defineStore('taskStore', () => {
       user_id,
       title,
       is_complete: false
-      // id: 1,
-      // inserted_at: //
     })
 
     if (error) {
@@ -65,7 +62,6 @@ export const useTaskStore = defineStore('taskStore', () => {
 
   const updateTask = async ({ id, update }) => {
     // https://supabase.com/docs/reference/javascript/update
-    // { is_complete }
     const response = await supabase.from('tasks').update(update).eq('id', id)
 
     if (response.error) {

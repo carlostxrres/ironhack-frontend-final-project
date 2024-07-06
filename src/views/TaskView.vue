@@ -30,7 +30,7 @@ const getNewTaskData = async () => {
   const targetTask = taskStore.tasks.find((t) => t.id == taskId)
   if (!targetTask) {
     console.error('Task not found:', taskId)
-    // : show error in UI
+    // to do: show error in UI
     return
   }
 

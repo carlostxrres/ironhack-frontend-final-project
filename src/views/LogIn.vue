@@ -55,7 +55,6 @@ const onSubmit = async (submitEvent) => {
       timeout: 3000
     })
     router.push('tasks')
-    console.log(userStore.user)
   }
 }
 </script>

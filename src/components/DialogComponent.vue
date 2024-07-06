@@ -18,18 +18,12 @@ const dialog = ref(null)
 
 onMounted(() => {
   dialog.value.showModal()
-  // dialog.value.style.maxHeight = "100dvh";
-  // dialog.value.style.minHeight = "40dvh";
   dialog.value.classList.add('open')
 
   if (props.onOpen) {
     props.onOpen()
   }
-
-  // dialog.value.addEventListener("close", () => {
-  //   // to do: add some closing animation here
-  //   router.push({ path: "/tasks" });
-  // });
+  // to do: add some closing animation here
 })
 const closeDialog = () => {
   dialog.value.addEventListener('transitionend', (transitionEvent) => {
