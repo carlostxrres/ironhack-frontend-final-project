@@ -20,7 +20,7 @@ This is a simple task manager app with the following features:
 - Pinia: state management.
 - Supabase: backend services (user authentication and a database for the tasks).
 
-## Possible future work
+### Possible future work
 
 - In `EditableTitle`, exit edit mode when Enter is pressed.
 - Add a skeleton loader in `TaskView`.
