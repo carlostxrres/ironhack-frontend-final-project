@@ -48,7 +48,6 @@ import ToastComponent from '@/components/ToastComponent.vue'
 .page-footer {
   margin-top: auto !important;
   border-top: 1px solid #ccc;
-  margin-top: calc(var(--margin-block) / 2);
 }
 
 .section {
@@ -64,6 +63,7 @@ import ToastComponent from '@/components/ToastComponent.vue'
   flex-direction: column;
   gap: 1rem;
   /* width: max-content; */
+  margin-bottom: calc(var(--margin-block) / 2);
 }
 
 .section-header,
