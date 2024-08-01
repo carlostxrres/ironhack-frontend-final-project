@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue'
 
 import SimpleLayout from '@/components/SimpleLayout.vue'
 import FormComponent from '@/components/FormComponent.vue'
-import ContinueAnonimouslyButton from '@/components/ContinueAnonimouslyButton.vue'
+import ContinueAnonymouslyButton from '@/components/ContinueAnonymouslyButton.vue'
 
 import router from '@/router/index.js'
 
@@ -82,7 +82,7 @@ const onSubmit = async (submitEvent) => {
         </fieldset>
         <button type="submit" class="button-primary">Sign in</button>
       </FormComponent>
-      <ContinueAnonimouslyButton />
+      <ContinueAnonymouslyButton />
     </template>
   </SimpleLayout>
 </template>

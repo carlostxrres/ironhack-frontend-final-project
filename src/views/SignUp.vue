@@ -6,7 +6,7 @@ import router from '@/router/index.js'
 
 import SimpleLayout from '@/components/SimpleLayout.vue'
 import FormComponent from '@/components/FormComponent.vue'
-import ContinueAnonimouslyButton from '@/components/ContinueAnonimouslyButton.vue'
+import ContinueAnonymouslyButton from '@/components/ContinueAnonymouslyButton.vue'
 
 import { validateForm, errorUi } from '@/services/validateForm.js'
 
@@ -109,7 +109,7 @@ const onSubmit = async (submitEvent) => {
         </fieldset>
         <button type="submit" class="button-primary">Create new User</button>
       </FormComponent>
-      <ContinueAnonimouslyButton />
+      <ContinueAnonymouslyButton />
     </template>
   </SimpleLayout>
 </template>

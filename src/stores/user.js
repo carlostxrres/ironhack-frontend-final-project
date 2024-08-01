@@ -41,10 +41,14 @@ export const useUserStore = defineStore('userStore', () => {
     }
   }
 
-  const signInAnonymously = async () => {
+  const signInAnonymously = async (captchaToken) => {
     // From https://supabase.com/docs/reference/javascript/auth-signinanonymously
 
-    const { data, error } = await supabase.auth.signInAnonymously()
+    const { data, error } = await supabase.auth.signInAnonymously({
+      options: {
+        captchaToken
+      }
+    })
 
     if (error) {
       console.error(error)
