@@ -11,13 +11,18 @@ const props = defineProps({
   onOpen: {
     type: Function,
     required: false
+  },
+  showMethod: {
+    type: String,
+    required: false,
+    default: "showModal"
   }
 })
 
 const dialog = ref(null)
 
 onMounted(() => {
-  dialog.value.showModal()
+  dialog.value[props.showMethod]()
   dialog.value.classList.add('open')
 
   if (props.onOpen) {
