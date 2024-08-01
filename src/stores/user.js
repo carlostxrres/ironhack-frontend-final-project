@@ -41,5 +41,25 @@ export const useUserStore = defineStore('userStore', () => {
     }
   }
 
-  return { user, createNewUser, signIn }
+  const signInAnonymously = async () => {
+    // From https://supabase.com/docs/reference/javascript/auth-signinanonymously
+
+    const { data, error } = await supabase.auth.signInAnonymously()
+
+    if (error) {
+      console.error(error)
+      return {
+        error: error.message
+      }
+    } else {
+      user.value = data
+      setUser(data)
+      return {
+        error: false
+      }
+    }
+
+  }
+
+  return { user, createNewUser, signIn, signInAnonymously }
 })
