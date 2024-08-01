@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 
 import SimpleLayout from '@/components/SimpleLayout.vue'
 import FormComponent from '@/components/FormComponent.vue'
+import ContinueAnonimouslyButton from '@/components/ContinueAnonimouslyButton.vue'
 
 import router from '@/router/index.js'
 
@@ -79,8 +80,9 @@ const onSubmit = async (submitEvent) => {
             <input type="password" name="password" placeholder="******" v-model="password" />
           </label>
         </fieldset>
-        <button type="submit" class="button-primary">Let's go!</button>
+        <button type="submit" class="button-primary">Sign in</button>
       </FormComponent>
+      <ContinueAnonimouslyButton />
     </template>
   </SimpleLayout>
 </template>

@@ -38,8 +38,8 @@ const getDayPeriod = () => {
 const getGreeting = () => {
   const dayPeriod = getDayPeriod()
   const user = getUser()
-  const email = user ? user.user.email : null
-  const appellative = user ? `, ${email}` : ''
+  const email = user && !user.user.is_anonymous ? user.user.email : null
+  const appellative = email ? `, ${email}` : ''
   return `Good ${dayPeriod}${appellative}!`
 }
 
